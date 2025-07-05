@@ -137,7 +137,7 @@ const DashboardLayout = ({
                     <motion.div variants={contentVariants}>
                         {children}
                     </motion.div>
-                </motion.main>
+                </motion.main>A
             </div>
             <Footer />
         </div>
