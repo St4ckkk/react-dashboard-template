@@ -1,0 +1,376 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --color-light-blue: rgb(47, 52, 59);
+  --color-deep-blue: rgb(17, 24, 39);
+}
+.bg-brand-gradient {
+  background: linear-gradient(to right, rgb(17, 24, 39), rgb(75, 85, 99));
+}
+
+.bg-layout {
+  background: #ebf0f9;
+}
+
+@layer components {
+  .alert {
+    @apply p-3 border rounded-md flex items-center justify-between;
+  }
+
+  .alert-primary {
+    @apply bg-blue-100 text-blue-800 border-l-4 border-blue-500;
+  }
+
+  .alert-secondary {
+    @apply bg-gray-200 text-gray-800 border-l-4 border-gray-500;
+  }
+
+  .alert-success {
+    @apply bg-green-100 text-green-800 border-l-4 border-green-500;
+  }
+
+  .alert-danger {
+    @apply bg-red-100 text-red-800 border-l-4 border-red-500;
+  }
+
+  .alert-warning {
+    @apply bg-yellow-100 text-amber-800 border-l-4 border-amber-500;
+  }
+
+  .alert-info {
+    @apply bg-cyan-100 text-cyan-800 border-l-4 border-cyan-500;
+  }
+
+  .alert-light {
+    @apply bg-white text-gray-800 border-l-4 border-gray-300;
+  }
+
+  .alert-dark {
+    @apply bg-gray-500 text-white border-l-4 border-gray-900;
+  }
+
+  .alert-dismiss-btn {
+    @apply text-gray-500 hover:text-gray-700 focus:outline-none transition-colors duration-200;
+  }
+
+  /* Solid alert styles */
+  .alert-solid {
+    @apply p-3 rounded-md flex items-center justify-between;
+  }
+
+  .alert-solid-primary {
+    @apply bg-blue-600 text-white;
+  }
+
+  .alert-solid-secondary {
+    @apply bg-gray-600 text-white;
+  }
+
+  .alert-solid-success {
+    @apply bg-green-600 text-white;
+  }
+
+  .alert-solid-danger {
+    @apply bg-red-600 text-white;
+  }
+
+  .alert-solid-warning {
+    @apply bg-amber-500 text-white;
+  }
+
+  .alert-solid-info {
+    @apply bg-cyan-600 text-white;
+  }
+
+  .alert-solid-light {
+    @apply bg-gray-100 text-gray-800;
+  }
+
+  .alert-solid-dark {
+    @apply bg-gray-800 text-white;
+  }
+
+  .alert .alert-icon {
+    @apply mr-3 flex-shrink-0;
+  }
+
+  .alert-primary .alert-icon {
+    @apply text-blue-600;
+  }
+
+  .alert-secondary .alert-icon {
+    @apply text-gray-600;
+  }
+
+  .alert-success .alert-icon {
+    @apply text-green-600;
+  }
+
+  .alert-danger .alert-icon {
+    @apply text-red-600;
+  }
+
+  .alert-warning .alert-icon {
+    @apply text-amber-600;
+  }
+
+  .alert-info .alert-icon {
+    @apply text-cyan-600;
+  }
+
+  .alert-light .alert-icon {
+    @apply text-gray-500;
+  }
+
+  .alert-dark .alert-icon {
+    @apply text-white;
+  }
+
+  /* Solid variant icon colors */
+  .alert-solid-primary .alert-icon,
+  .alert-solid-secondary .alert-icon,
+  .alert-solid-success .alert-icon,
+  .alert-solid-danger .alert-icon,
+  .alert-solid-warning .alert-icon,
+  .alert-solid-info .alert-icon,
+  .alert-solid-dark .alert-icon {
+    @apply text-white;
+  }
+
+  .alert-solid-light .alert-icon {
+    @apply text-gray-800;
+  }
+
+  /* Outline alert */
+  .alert-outline {
+    @apply border rounded-md;
+  }
+
+  .alert-outline-primary {
+    @apply text-blue-600 border-blue-600;
+  }
+
+  .alert-outline-secondary {
+    @apply text-gray-600 border-gray-600;
+  }
+
+  .alert-outline-success {
+    @apply text-green-600 border-green-600;
+  }
+
+  .alert-outline-danger {
+    @apply text-red-600 border-red-600;
+  }
+
+  .alert-outline-warning {
+    @apply text-amber-600 border-amber-600;
+  }
+
+  .alert-outline-info {
+    @apply text-cyan-600 border-cyan-600;
+  }
+
+  .alert-outline-light {
+    @apply text-gray-500 border-gray-300;
+  }
+
+  .alert-outline-dark {
+    @apply text-gray-800 border-gray-800;
+  }
+
+  .accordion-body {
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .badge {
+    @apply inline-block px-2 py-0.5 text-xs font-medium rounded-md;
+  }
+
+  /* Default badges */
+  .badge-primary {
+    @apply bg-blue-600 text-white;
+  }
+
+  .badge-secondary {
+    @apply bg-gray-600 text-white;
+  }
+
+  .badge-success {
+    @apply bg-green-600 text-white;
+  }
+
+  .badge-danger {
+    @apply bg-red-600 text-white;
+  }
+
+  .badge-warning {
+    @apply bg-amber-500 text-black;
+  }
+
+  .badge-info {
+    @apply bg-cyan-600 text-white;
+  }
+
+  .badge-light {
+    @apply bg-gray-100 text-gray-800;
+  }
+
+  .badge-dark {
+    @apply bg-gray-800 text-white;
+  }
+
+  /* Border badges */
+  .badge-outline {
+    @apply border;
+  }
+
+  .badge-outline-primary {
+    @apply border-blue-600 text-blue-600;
+  }
+
+  .badge-outline-secondary {
+    @apply border-gray-600 text-gray-600;
+  }
+
+  .badge-outline-success {
+    @apply border-green-600 text-green-600;
+  }
+
+  .badge-outline-danger {
+    @apply border-red-600 text-red-600;
+  }
+
+  .badge-outline-warning {
+    @apply border-amber-500 text-amber-600;
+  }
+
+  .badge-outline-info {
+    @apply border-cyan-600 text-cyan-600;
+  }
+
+  .badge-outline-light {
+    @apply border-gray-300 text-gray-500;
+  }
+
+  .badge-outline-dark {
+    @apply border-gray-800 text-gray-800;
+  }
+
+  /* Pill Badges */
+  .badge-pill {
+    @apply rounded-full;
+  }
+
+  /* Button Badges */
+  .badge-button {
+    @apply flex justify-between items-center rounded-md py-2 px-5 gap-2;
+  }
+
+  .badge-button-text {
+    @apply text-sm font-medium;
+  }
+
+  .badge-button-counter {
+    @apply flex items-center justify-center w-5 h-5 px-2 text-xs font-medium bg-white rounded-md;
+  }
+
+  .badge-button.badge-primary .badge-button-counter {
+    @apply text-blue-600;
+  }
+
+  .badge-button.badge-secondary .badge-button-counter {
+    @apply text-gray-600;
+  }
+
+  .badge-button.badge-success .badge-button-counter {
+    @apply text-green-600;
+  }
+
+  .badge-button.badge-danger .badge-button-counter {
+    @apply text-red-600;
+  }
+
+  .badge-button.badge-warning .badge-button-counter {
+    @apply text-amber-600;
+  }
+
+  .badge-button.badge-info .badge-button-counter {
+    @apply text-cyan-600;
+  }
+
+  .badge-button.badge-light .badge-button-counter {
+    @apply text-white bg-gray-500;
+  }
+
+  .badge-button.badge-dark .badge-button-counter {
+    @apply text-gray-800;
+  }
+
+  /* Icon Badges */
+  .icon-badge {
+    @apply inline-flex items-center gap-1.5  px-2 py-0.5  text-xs font-medium rounded-md;
+  }
+
+  /* Status Badges */
+  @keyframes status-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .animate-pulse {
+    animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 1s ease-in-out infinite;
+  }
+
+  @keyframes bounce-subtle {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  .list-group-flush {
+    @apply border-0 rounded-none;
+  }
+
+  .list-group-flush .list-group-item {
+    @apply border-r-0 border-l-0 rounded-none;
+  }
+
+  .list-group-flush .list-group-item:first-child {
+    @apply border-t-0;
+  }
+
+  .list-group-flush .list-group-item:last-child {
+    @apply border-b-0;
+  }
+}
+
+.counter-reset-list {
+  counter-reset: section;
+}
+
+.counter-reset-list .list-group-item::before {
+  content: counter(section) '.';
+  counter-increment: section;
+  margin-right: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.counter-reset-list .list-group-item.active::before {
+  color: white;
+}
