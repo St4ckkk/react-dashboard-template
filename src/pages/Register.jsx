@@ -85,7 +85,7 @@ const Register = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center"
                 >
-                    <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
+                    <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full shadow-lg">
                         <img
                             src="/static/img/template-logo2.png"
                             alt="Logo"

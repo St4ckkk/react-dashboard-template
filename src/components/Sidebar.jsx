@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
     FaHome, FaBullhorn, FaUsers, FaFileAlt, FaDatabase,
     FaClipboardList, FaClipboardCheck, FaChevronDown,
-    FaUser, FaChevronUp, FaList, FaTimes
+    FaUser, FaChevronUp, FaList, FaTimes, FaUserPlus, FaSignInAlt
 } from 'react-icons/fa';
 import {
     FiAlertTriangle, FiGrid, FiStar, FiChevronsRight,
@@ -37,6 +37,18 @@ const Sidebar = ({ onClose }) => {
             label: 'Dashboard',
             path: '/dashboard',
             active: currentPath === '/dashboard'
+        },
+        {
+            icon: <FaSignInAlt className="w-4 h-4 md:w-5 md:h-5" />,
+            label: 'Login',
+            path: '/login',
+            active: currentPath === '/login'
+        },
+        {
+            icon: <FaUserPlus className="w-4 h-4 md:w-5 md:h-5" />,
+            label: 'Register',
+            path: '/register',
+            active: currentPath === '/register'
         },
         {
             icon: <FaList className="w-4 h-4 md:w-5 md:h-5" />,
