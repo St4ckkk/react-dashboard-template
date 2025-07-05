@@ -5,6 +5,7 @@ import './index.css'
 import Home from '@pages/Home'
 import Dashboard from '@pages/Dashboard'
 import Login from '@pages/Login'
+import Register from '@pages/Register'
 import NotFound from '@pages/NotFound'
 import ComingSoon from '@pages/ComingSoon'
 
@@ -12,12 +13,12 @@ import ComingSoon from '@pages/ComingSoon'
 import AccordionPage from '@pages/components/accordions/AccordionPage'
 import AlertPage from '@pages/components/alerts/AlertPage'
 import BadgePage from '@pages/components/badges/BadgePage'
-
-import BreadcrumbsPage from '@pages/components/breadcrumbs/BreadcrumbPage'
+import BreadcrumbPage from '@pages/components/breadcrumbs/BreadcrumbPage'
 import ButtonsPage from '@pages/components/buttons/ButtonPage'
 import CardsPage from '@pages/components/cards/CardPage'
 import CarouselsPage from '@pages/components/carousels/CarouselPage'
-
+import ListGroupPage from '@pages/components/list-groups/ListGroupPage'
+import ModalPage from '@pages/components/modals/ModalPage'
 
 // Import feature pages
 import ManageAnnouncements from '@pages/announcements/ManageAnnouncements'
@@ -31,8 +32,9 @@ function App() {
     <Router>
       <Routes>
         {/* Main Pages */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Component Documentation Pages */}
@@ -40,11 +42,23 @@ function App() {
         <Route path="/components/accordions" element={<AccordionPage />} />
         <Route path="/components/alerts" element={<AlertPage />} />
         <Route path="/components/badges" element={<BadgePage />} />
-        {/* Add other component routes as files exist */}
-        <Route path="/components/breadcrumbs" element={<BreadcrumbsPage />} />
+        <Route path="/components/breadcrumbs" element={<BreadcrumbPage />} />
         <Route path="/components/buttons" element={<ButtonsPage />} />
         <Route path="/components/cards" element={<CardsPage />} />
         <Route path="/components/carousels" element={<CarouselsPage />} />
+        <Route path="/components/list-groups" element={<ListGroupPage />} />
+        <Route path="/components/modals" element={<ModalPage />} />
+
+        {/* Placeholder routes for components not yet created */}
+        <Route path="/components/tabs" element={<ComingSoon />} />
+        <Route path="/components/pagination" element={<ComingSoon />} />
+        <Route path="/components/progress" element={<ComingSoon />} />
+        <Route path="/components/spinners" element={<ComingSoon />} />
+        <Route path="/components/tooltips" element={<ComingSoon />} />
+        <Route path="/components/dropdowns" element={<ComingSoon />} />
+        <Route path="/components/formfields" element={<ComingSoon />} />
+        <Route path="/components/calendar" element={<ComingSoon />} />
+        <Route path="/components/table" element={<ComingSoon />} />
 
         {/* Feature Pages */}
         <Route path="/announcements" element={<ManageAnnouncements />} />

@@ -91,7 +91,7 @@ const Sidebar = ({ onClose }) => {
                 {
                     icon: <FiList className="w-3 h-3 md:w-4 md:h-4" />,
                     label: 'List group',
-                    path: '/components/listgroups',
+                    path: '/components/list-groups',
                     active: url === '/components/listgroups'
                 },
                 {
@@ -132,63 +132,63 @@ const Sidebar = ({ onClose }) => {
                 }
             ]
         },
-        {
-            icon: <FaBullhorn className="w-4 h-4 md:w-5 md:h-5" />,
-            label: 'Announcements',
-            path: '/announcements',
-            active: currentPath === '/announcements'
-        },
-        {
-            icon: <FaUsers className="w-4 h-4 md:w-5 md:h-5" />,
-            label: 'Officials',
-            path: '/officials',
-            active: currentPath === '/officials'
-        },
-        {
-            icon: <FaFileAlt className="w-4 h-4 md:w-5 md:h-5" />,
-            label: 'Issuance Details',
-            path: '/issuance-details',
-            active: currentPath === '/issuance-details'
-        },
-        {
-            icon: <FaDatabase className="w-4 h-4 md:w-5 md:h-5" />,
-            label: 'Content Management',
-            path: '/content-management',
-            active: currentPath === '/content-management'
-        },
-        {
-            icon: <FaClipboardList className="w-4 h-4 md:w-5 md:h-5" />,
-            label: 'Records',
-            key: 'records',
-            active: ['/records', '/record'].some(path => currentPath.startsWith(path)),
-            hasDropdown: true,
-            subItems: [
-                {
-                    icon: <FiBook className="w-3 h-3 md:w-4 md:h-4" />,
-                    label: 'Blotter Record',
-                    path: '/records/blotter',
-                    active: url === '/records/blotter'
-                },
-                {
-                    icon: <FiUsers className="w-3 h-3 md:w-4 md:h-4" />,
-                    label: 'Residents Management',
-                    path: '/record/residents',
-                    active: url === '/record/residents'
-                },
-                {
-                    icon: <FiUserPlus className="w-3 h-3 md:w-4 md:h-4" />,
-                    label: 'Pending Residents',
-                    path: '/records/pending-residents',
-                    active: url === '/records/pending-residents'
-                }
-            ]
-        },
-        {
-            icon: <FaClipboardCheck className="w-4 h-4 md:w-5 md:h-5" />,
-            label: 'Monitoring of Request',
-            path: '/request',
-            active: currentPath === '/request'
-        },
+        // {
+        //     icon: <FaBullhorn className="w-4 h-4 md:w-5 md:h-5" />,
+        //     label: 'Announcements',
+        //     path: '/announcements',
+        //     active: currentPath === '/announcements'
+        // },
+        // {
+        //     icon: <FaUsers className="w-4 h-4 md:w-5 md:h-5" />,
+        //     label: 'Officials',
+        //     path: '/officials',
+        //     active: currentPath === '/officials'
+        // },
+        // {
+        //     icon: <FaFileAlt className="w-4 h-4 md:w-5 md:h-5" />,
+        //     label: 'Issuance Details',
+        //     path: '/issuance-details',
+        //     active: currentPath === '/issuance-details'
+        // },
+        // {
+        //     icon: <FaDatabase className="w-4 h-4 md:w-5 md:h-5" />,
+        //     label: 'Content Management',
+        //     path: '/content-management',
+        //     active: currentPath === '/content-management'
+        // },
+        // {
+        //     icon: <FaClipboardList className="w-4 h-4 md:w-5 md:h-5" />,
+        //     label: 'Records',
+        //     key: 'records',
+        //     active: ['/records', '/record'].some(path => currentPath.startsWith(path)),
+        //     hasDropdown: true,
+        //     subItems: [
+        //         {
+        //             icon: <FiBook className="w-3 h-3 md:w-4 md:h-4" />,
+        //             label: 'Blotter Record',
+        //             path: '/records/blotter',
+        //             active: url === '/records/blotter'
+        //         },
+        //         {
+        //             icon: <FiUsers className="w-3 h-3 md:w-4 md:h-4" />,
+        //             label: 'Residents Management',
+        //             path: '/record/residents',
+        //             active: url === '/record/residents'
+        //         },
+        //         {
+        //             icon: <FiUserPlus className="w-3 h-3 md:w-4 md:h-4" />,
+        //             label: 'Pending Residents',
+        //             path: '/records/pending-residents',
+        //             active: url === '/records/pending-residents'
+        //         }
+        //     ]
+        // },
+        // {
+        //     icon: <FaClipboardCheck className="w-4 h-4 md:w-5 md:h-5" />,
+        //     label: 'Monitoring of Request',
+        //     path: '/request',
+        //     active: currentPath === '/request'
+        // },
     ];
 
     useEffect(() => {
@@ -241,8 +241,8 @@ const Sidebar = ({ onClose }) => {
                                         <button
                                             onClick={() => toggleDropdown(item.key)}
                                             className={`w-full flex items-center justify-center px-3 md:px-4 py-2 md:py-3 text-sm md:text-base transition-all duration-300 ease-in-out transform hover:scale-[1.02] ${item.active || openDropdowns[item.key]
-                                                    ? 'bg-deep-blue text-white shadow-md'
-                                                    : 'hover:bg-deep-blue hover:text-white hover:shadow-sm'
+                                                ? 'bg-deep-blue text-white shadow-md'
+                                                : 'hover:bg-deep-blue hover:text-white hover:shadow-sm'
                                                 }`}
                                         >
                                             <span className="mr-2 md:mr-3 transition-transform duration-300 ease-in-out">{item.icon}</span>
@@ -269,8 +269,8 @@ const Sidebar = ({ onClose }) => {
                                                             to={subItem.path}
                                                             onClick={handleLinkClick}
                                                             className={`flex items-center pl-10 md:pl-12 py-2 md:py-3 text-xs md:text-sm transition-all duration-200 ease-in-out ${subItem.active
-                                                                    ? 'text-blue-500 font-medium bg-blue-50 border-r-2 border-blue-500'
-                                                                    : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
+                                                                ? 'text-blue-500 font-medium bg-blue-50 border-r-2 border-blue-500'
+                                                                : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
                                                                 }`}
                                                         >
                                                             <span className="mr-1 md:mr-2 transition-transform duration-200 ease-in-out">{subItem.icon}</span>
@@ -286,8 +286,8 @@ const Sidebar = ({ onClose }) => {
                                         to={item.path}
                                         onClick={handleLinkClick}
                                         className={`flex items-center px-3 md:px-4 py-2 md:py-3 text-sm md:text-base transition-all duration-300 ease-in-out transform hover:scale-[1.02] ${item.active
-                                                ? 'bg-deep-blue text-white shadow-md'
-                                                : 'hover:bg-deep-blue hover:text-white hover:shadow-sm'
+                                            ? 'bg-deep-blue text-white shadow-md'
+                                            : 'hover:bg-deep-blue hover:text-white hover:shadow-sm'
                                             }`}
                                     >
                                         <span className="mr-2 md:mr-3 transition-transform duration-300 ease-in-out">{item.icon}</span>

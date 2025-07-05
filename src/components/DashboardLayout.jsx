@@ -3,6 +3,8 @@ import Header from '@components/Header'
 import Footer from '@components/Footer'
 import { FaHome, FaChevronRight } from 'react-icons/fa'
 import { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const DashboardLayout = ({
     children,
@@ -20,21 +22,57 @@ const DashboardLayout = ({
                     {breadcrumb.map((item, index) => (
                         <Fragment key={index}>
                             {index > 0 && <FaChevronRight className="mx-1 md:mx-2 text-xs text-gray-400" />}
-                            <a
-                                href={item.href}
-                                className={`text-xs md:text-sm ${index === breadcrumb.length - 1 ?
-                                    "text-gray-500" :
-                                    "text-blue-500 hover:text-blue-700"
+                            <Link
+                                to={item.href}
+                                className={`text-xs md:text-sm transition-colors duration-200 ease-in-out ${index === breadcrumb.length - 1 ?
+                                        "text-gray-500" :
+                                        "text-blue-500 hover:text-blue-700"
                                     }`}
                             >
                                 {item.name}
-                            </a>
+                            </Link>
                         </Fragment>
                     ))}
                 </div>
             );
         }
         return <span className="text-gray-400 text-xs md:text-sm">{breadcrumb}</span>;
+    };
+
+    // Animation variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.3,
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const headerVariants = {
+        hidden: { opacity: 0, y: -10 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.25,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const contentVariants = {
+        hidden: { opacity: 0, y: 15 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.3,
+                ease: "easeOut"
+            }
+        }
     };
 
     return (
@@ -71,20 +109,35 @@ const DashboardLayout = ({
                     </div>
                 </div>
 
-                {/* Main Content with smooth margin transition */}
-                <main className="flex-1 overflow-x-hidden overflow-y-auto p-3 md:p-5 lg:p-7 bg-layout transition-all duration-300 ease-in-out">
-                    <div className="border-b border-gray-200 pb-2 md:pb-3 mb-3 md:mb-5">
+                {/* Main Content with smooth animations */}
+                <motion.main
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex-1 overflow-x-hidden overflow-y-auto p-3 md:p-5 lg:p-7 bg-layout transition-all duration-300 ease-in-out"
+                >
+                    {/* Header section with animation */}
+                    <motion.div
+                        variants={headerVariants}
+                        className="border-b border-gray-200 pb-2 md:pb-3 mb-3 md:mb-5"
+                    >
                         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
-                            <h1 className="text-lg md:text-xl font-semibold">{title}</h1>
+                            <h1 className="text-lg md:text-xl font-semibold">
+                                {title}
+                            </h1>
                             <div className="hidden sm:block border-l border-gray-300 h-6 mx-3"></div>
                             <div className="flex items-center text-sm text-gray-500">
                                 <span className="hidden sm:inline">{icon}</span>
                                 {renderBreadcrumbs()}
                             </div>
                         </div>
-                    </div>
-                    {children}
-                </main>
+                    </motion.div>
+
+                    {/* Page content with animation */}
+                    <motion.div variants={contentVariants}>
+                        {children}
+                    </motion.div>
+                </motion.main>
             </div>
             <Footer />
         </div>

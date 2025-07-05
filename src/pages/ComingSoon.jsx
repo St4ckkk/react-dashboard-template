@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '@components/DashboardLayout';
 import Container from '@components/ui/container/Container';
@@ -18,7 +17,7 @@ const ComingSoon = ({ title = "Coming Soon", returnPath = "/dashboard" }) => {
                 <div className="flex flex-col items-center justify-center py-16 px-4">
                     <div className="w-full max-w-md text-center">
                         <div className="inline-flex">
-                            <img src="./static/img/template-logo2.png" alt="" srcset="" className='w-50 h-50' />
+                            <img src="/static/img/template-logo2.png" alt="" srcset="" className='w-50 h-50' />
                         </div>
 
                         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Coming Soon</h1>
