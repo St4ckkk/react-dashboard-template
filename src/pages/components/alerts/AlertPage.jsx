@@ -3,9 +3,9 @@ import DashboardLayout from '@components/DashboardLayout';
 import Container from '@components/ui/container/Container';
 import HeaderText from '@components/HeaderText';
 import CodePreviewToggle from '@components/CodePreviewToggle';
-import DefaultPreview from './defaultPreview';
-import SolidPreview from './solidPreview';
-import IconPreview from './iconPreview';
+import DefaultPreview from './DefaultPreview';
+import SolidPreview from './SolidPreview';
+import IconPreview from './IconPreview';
 import OutlinePreview from './OutlinePreview';
 import WithHeadingSeparatorPreview from './WithHeadingSeparatorPreview';
 
