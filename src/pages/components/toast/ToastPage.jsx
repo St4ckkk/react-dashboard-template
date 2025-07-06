@@ -7,166 +7,267 @@ import ToastGuidelines from '@components/ToastGuidelines';
 import {
     ToastProvider,
     useToast,
+    ToastTemplates,
     SuccessToast,
-    ErrorToast,
-    WarningToast,
-    InfoToast
+    ErrorToast
 } from '@components/ui/toast/Toast';
-import { FaCheckCircle, FaTimesCircle, FaExclamationTriangle, FaInfoCircle } from 'react-icons/fa';
+import {
+    FaCheckCircle,
+    FaTimesCircle,
+    FaExclamationTriangle,
+    FaInfoCircle,
+    FaDownload,
+    FaUpload,
+    FaHeart,
+    FaStar,
+    FaShieldAlt,
+    FaRocket,
+    FaGift,
+    FaMagic,
+    FaFire,
+    FaGem,
+    FaCrown,
+    FaThumbsUp,
+    FaLightbulb,
+    FaTrophy,
+    FaMusic,
+    FaCamera,
+    FaWifi,
+    FaBatteryHalf,
+    FaCode,
+    FaDatabase,
+    FaBolt,
+    FaSync
+} from 'react-icons/fa';
 
 const ToastPageContent = () => {
     const { addToast, removeAllToasts } = useToast();
     const [showStaticExample, setShowStaticExample] = useState('success');
 
+    // Basic Toast Handlers
     const handleBasicToast = (type) => {
         const messages = {
             success: 'Operation completed successfully!',
             error: 'An error occurred while processing your request.',
             warning: 'Please review your input before continuing.',
-            info: 'New updates are available for download.'
+            info: 'New updates are available for download.',
+            loading: 'Processing your request...'
         };
 
         addToast({
             type,
             message: messages[type],
-            duration: 5000
+            duration: type === 'loading' ? 0 : 5000
         });
     };
 
-    const handleToastWithTitle = (type) => {
+    // Enhanced Toast Handlers
+    const handleEnhancedToast = (type) => {
         const configs = {
-            success: {
-                title: 'Success!',
-                message: 'Your profile has been updated successfully.',
+            upload: {
+                title: 'Upload Complete',
+                message: 'Your file has been uploaded successfully.',
+                duration: 4000
             },
-            error: {
-                title: 'Error!',
-                message: 'Failed to save changes. Please try again.',
+            download: {
+                title: 'Download Ready',
+                message: 'Your download is ready and saved to Downloads folder.',
+                duration: 4000
             },
-            warning: {
-                title: 'Warning!',
-                message: 'Your session will expire in 5 minutes.',
+            like: {
+                title: 'Liked!',
+                message: 'Added to your favorites.',
+                duration: 3000
             },
-            info: {
-                title: 'Information',
-                message: 'System maintenance scheduled for tonight.',
+            star: {
+                title: 'Starred!',
+                message: 'Bookmarked for later viewing.',
+                duration: 3000
+            },
+            security: {
+                title: 'Security Alert',
+                message: 'New login detected from unknown device.',
+                duration: 8000,
+                action: {
+                    label: 'Review',
+                    onClick: () => addToast({ type: 'info', message: 'Redirecting to security settings...', duration: 3000 })
+                }
+            },
+            rocket: {
+                title: 'Deployment Successful!',
+                message: 'Your application is now live.',
+                duration: 5000
+            },
+            gift: {
+                title: 'Surprise!',
+                message: 'You\'ve received a special gift.',
+                duration: 4000
+            },
+            magic: {
+                title: 'Magic Happened!',
+                message: 'Something amazing just occurred.',
+                duration: 4000
+            },
+            fire: {
+                title: 'Hot Topic!',
+                message: 'This content is trending right now.',
+                duration: 4000
+            },
+            gem: {
+                title: 'Premium Feature',
+                message: 'Unlock exclusive content with premium.',
+                duration: 5000
+            },
+            crown: {
+                title: 'VIP Access',
+                message: 'Welcome to our exclusive VIP area.',
+                duration: 4000
+            },
+            thumbs: {
+                title: 'Great Job!',
+                message: 'Your feedback has been submitted.',
+                duration: 3000
+            },
+            idea: {
+                title: 'New Suggestion',
+                message: 'AI has generated a recommendation for you.',
+                duration: 5000
+            },
+            trophy: {
+                title: 'Achievement Unlocked!',
+                message: 'You\'ve completed all daily tasks.',
+                duration: 6000
+            },
+            music: {
+                title: 'Now Playing',
+                message: 'Your playlist has started.',
+                duration: 4000
+            },
+            camera: {
+                title: 'Photo Saved',
+                message: 'Image captured and saved to gallery.',
+                duration: 3000
+            },
+            wifi: {
+                title: 'Connected',
+                message: 'Internet connection restored.',
+                duration: 3000
+            },
+            battery: {
+                title: 'Low Battery',
+                message: 'Please charge your device soon.',
+                duration: 0,
+                action: {
+                    label: 'Dismiss',
+                    onClick: () => { }
+                }
+            },
+            code: {
+                title: 'Code Compiled',
+                message: 'Build completed successfully.',
+                duration: 4000
+            },
+            database: {
+                title: 'Backup Complete',
+                message: 'Database backup has been created.',
+                duration: 4000
+            },
+            bolt: {
+                title: 'Performance Boost',
+                message: 'Application speed improved by 40%.',
+                duration: 4000
             }
         };
 
         addToast({
             type,
-            ...configs[type],
-            duration: 7000
+            ...configs[type]
         });
     };
 
-    const handleToastWithAction = () => {
-        addToast({
-            type: 'info',
-            title: 'New Version Available',
-            message: 'Version 2.0 is now available with new features.',
-            action: {
-                label: 'Update Now',
-                onClick: () => {
-                    addToast({
-                        type: 'success',
-                        message: 'Update started successfully!',
-                        duration: 3000
-                    });
-                }
-            },
-            duration: 10000
-        });
-    };
+    // Template Toast Handlers
+    const handleTemplateToast = (template) => {
+        const templates = {
+            fileUpload: () => addToast(ToastTemplates.fileUploadSuccess('document.pdf')),
+            fileDownload: () => addToast(ToastTemplates.fileDownloadSuccess('report.xlsx')),
+            likeAdded: () => addToast(ToastTemplates.likeAdded('Amazing Article')),
+            starAdded: () => addToast(ToastTemplates.starAdded()),
+            securityAlert: () => addToast(ToastTemplates.securityAlert('Suspicious login attempt detected')),
+            achievement: () => addToast(ToastTemplates.achievementUnlocked('Master Contributor')),
+            idea: () => addToast(ToastTemplates.ideaGenerated()),
+            magic: () => addToast(ToastTemplates.magicHappened()),
+            connection: () => addToast(ToastTemplates.connectionRestored()),
+            battery: () => addToast(ToastTemplates.lowBattery()),
+            deploy: () => addToast(ToastTemplates.codeDeployed()),
+            backup: () => addToast(ToastTemplates.databaseBackup())
+        };
 
-    const handlePersistentToast = () => {
-        addToast({
-            type: 'warning',
-            title: 'Persistent Toast',
-            message: 'This toast will stay until manually closed.',
-
-        });
+        templates[template]?.();
     };
 
     const handleMultipleToasts = () => {
-        addToast({
-            type: 'info',
-            message: 'First toast message',
-            duration: 4000
+        const toastTypes = ['info', 'success', 'warning', 'magic', 'star'];
+        toastTypes.forEach((type, index) => {
+            setTimeout(() => {
+                addToast({
+                    type,
+                    message: `${type.charAt(0).toUpperCase() + type.slice(1)} toast #${index + 1}`,
+                    duration: 4000
+                });
+            }, index * 800);
         });
-
-        setTimeout(() => {
-            addToast({
-                type: 'success',
-                message: 'Second toast message',
-                duration: 4000
-            });
-        }, 1000);
-
-        setTimeout(() => {
-            addToast({
-                type: 'warning',
-                message: 'Third toast message',
-                duration: 4000
-            });
-        }, 2000);
     };
 
     const basicToastCode = `import { useToast } from '@components/ui/toast/Toast';
 
 const { addToast } = useToast();
 
-// Basic success toast
+// Basic toasts
 addToast({
     type: 'success',
     message: 'Operation completed successfully!',
     duration: 5000
 });
 
-// Basic error toast
 addToast({
-    type: 'error',
-    message: 'An error occurred while processing your request.',
+    type: 'loading',
+    message: 'Processing your request...',
+    duration: 0 // Persistent until manually closed
+});`;
+
+    const enhancedToastCode = `// Enhanced toast types with special styling
+addToast({
+    type: 'magic',
+    title: 'Magic Happened!',
+    message: 'Something amazing just occurred.',
+    duration: 4000
+});
+
+addToast({
+    type: 'rocket',
+    title: 'Deployment Successful!',
+    message: 'Your application is now live.',
     duration: 5000
-});`;
+});
 
-    const titleToastCode = `// Toast with title and message
 addToast({
-    type: 'success',
-    title: 'Success!',
-    message: 'Your profile has been updated successfully.',
-    duration: 7000
-});`;
-
-    const actionToastCode = `// Toast with action button
-addToast({
-    type: 'info',
-    title: 'New Version Available',
-    message: 'Version 2.0 is now available with new features.',
+    type: 'security',
+    title: 'Security Alert',
+    message: 'New login detected from unknown device.',
+    duration: 8000,
     action: {
-        label: 'Update Now',
-        onClick: () => {
-            // Handle action
-            console.log('Update clicked');
-        }
-    },
-    duration: 10000
+        label: 'Review',
+        onClick: () => console.log('Review clicked')
+    }
 });`;
 
-    const staticToastCode = `import { SuccessToast, ErrorToast, WarningToast, InfoToast } from '@components/ui/toast/Toast';
+    const templateToastCode = `import { ToastTemplates } from '@components/ui/toast/Toast';
 
-// Static toast components
-<SuccessToast 
-    title="Success!" 
-    message="Operation completed successfully." 
-    onClose={() => console.log('Closed')}
-/>
-
-<ErrorToast 
-    title="Error!" 
-    message="Something went wrong." 
-    onClose={() => console.log('Closed')}
-/>`;
+// Using predefined templates
+addToast(ToastTemplates.fileUploadSuccess('document.pdf'));
+addToast(ToastTemplates.achievementUnlocked('Master Contributor'));
+addToast(ToastTemplates.securityAlert('Suspicious login attempt'));
+addToast(ToastTemplates.codeDeployed());`;
 
     const providerSetupCode = `// App.jsx - Wrap your app with ToastProvider
 import { ToastProvider } from '@components/ui/toast/Toast';
@@ -179,31 +280,9 @@ function App() {
     );
 }`;
 
-    const hookUsageCode = `// Using the toast hook
-import { useToast } from '@components/ui/toast/Toast';
-
-function MyComponent() {
-    const { addToast, removeAllToasts } = useToast();
-    
-    const handleSuccess = () => {
-        addToast({
-            type: 'success',
-            message: 'Success message',
-            duration: 5000
-        });
-    };
-    
-    return (
-        <div>
-            <button onClick={handleSuccess}>Show Toast</button>
-            <button onClick={removeAllToasts}>Clear All</button>
-        </div>
-    );
-}`;
-
     return (
         <DashboardLayout
-            title="Toast Notifications"
+            title="Enhanced Toast Notifications"
             breadcrumb={[
                 { name: 'Home', href: '/' },
                 { name: 'Components' },
@@ -214,17 +293,17 @@ function MyComponent() {
             <Container className="p-6 mb-8">
                 <HeaderText
                     TitleHeader="Setup"
-                    title="Getting Started with Toast"
+                    title="Getting Started with Enhanced Toast"
                 />
                 <CodePreviewToggle
                     previewContent={
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
                             <h4 className="font-semibold text-blue-900 mb-2">Provider Setup</h4>
                             <p className="text-sm text-blue-700 mb-4">
-                                Wrap your app with ToastProvider to enable toast notifications throughout your application.
+                                Wrap your app with ToastProvider to enable enhanced toast notifications with beautiful animations and unique styles.
                             </p>
                             <div className="bg-white rounded border p-3">
-                                <code className="text-sm">
+                                <code className="text-sm text-gray-800">
                                     &lt;ToastProvider&gt;<br />
                                     &nbsp;&nbsp;&lt;YourApp /&gt;<br />
                                     &lt;/ToastProvider&gt;
@@ -236,43 +315,50 @@ function MyComponent() {
                 />
             </Container>
 
-            {/* Basic Usage */}
+            {/* Basic Toast Types */}
             <Container className="p-6 mb-8">
                 <HeaderText
-                    TitleHeader="Basic Usage"
-                    title="Simple Toast Notifications"
+                    TitleHeader="Basic Types"
+                    title="Essential Toast Notifications"
                 />
                 <CodePreviewToggle
                     previewContent={
                         <div className="space-y-4">
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                                 <button
                                     onClick={() => handleBasicToast('success')}
-                                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center justify-center space-x-2"
+                                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center space-x-2 transition-colors"
                                 >
                                     <FaCheckCircle className="w-4 h-4" />
                                     <span>Success</span>
                                 </button>
                                 <button
                                     onClick={() => handleBasicToast('error')}
-                                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 flex items-center justify-center space-x-2"
+                                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center justify-center space-x-2 transition-colors"
                                 >
                                     <FaTimesCircle className="w-4 h-4" />
                                     <span>Error</span>
                                 </button>
                                 <button
                                     onClick={() => handleBasicToast('warning')}
-                                    className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 flex items-center justify-center space-x-2"
+                                    className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 flex items-center justify-center space-x-2 transition-colors"
                                 >
                                     <FaExclamationTriangle className="w-4 h-4" />
                                     <span>Warning</span>
                                 </button>
                                 <button
                                     onClick={() => handleBasicToast('info')}
-                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center justify-center space-x-2"
+                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2 transition-colors"
                                 >
                                     <FaInfoCircle className="w-4 h-4" />
                                     <span>Info</span>
+                                </button>
+                                <button
+                                    onClick={() => handleBasicToast('loading')}
+                                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center justify-center space-x-2 transition-colors"
+                                >
+                                    <FaSync className="w-4 h-4" />
+                                    <span>Loading</span>
                                 </button>
                             </div>
                         </div>
@@ -281,99 +367,337 @@ function MyComponent() {
                 />
             </Container>
 
-            {/* Advanced Features */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <Container className="p-6">
-                    <HeaderText
-                        TitleHeader="With Title"
-                        title="Toast with Title & Message"
-                    />
-                    <CodePreviewToggle
-                        previewContent={
-                            <div className="space-y-3">
-                                <button
-                                    onClick={() => handleToastWithTitle('success')}
-                                    className="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                                >
-                                    Success with Title
-                                </button>
-                                <button
-                                    onClick={() => handleToastWithTitle('error')}
-                                    className="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                                >
-                                    Error with Title
-                                </button>
-                            </div>
-                        }
-                        codeContent={titleToastCode}
-                    />
-                </Container>
-
-                <Container className="p-6">
-                    <HeaderText
-                        TitleHeader="With Action"
-                        title="Interactive Toast"
-                    />
-                    <CodePreviewToggle
-                        previewContent={
-                            <div className="space-y-3">
-                                <button
-                                    onClick={handleToastWithAction}
-                                    className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                                >
-                                    Toast with Action
-                                </button>
-                                <button
-                                    onClick={handlePersistentToast}
-                                    className="w-full px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
-                                >
-                                    Persistent Toast
-                                </button>
-                            </div>
-                        }
-                        codeContent={actionToastCode}
-                    />
-                </Container>
-            </div>
-
-            {/* Multiple Toasts */}
+            {/* Enhanced Toast Types */}
             <Container className="p-6 mb-8">
                 <HeaderText
-                    TitleHeader="Multiple Toasts"
-                    title="Stack Multiple Notifications"
+                    TitleHeader="Enhanced Types"
+                    title="Unique Toast Styles & Animations"
+                />
+                <CodePreviewToggle
+                    previewContent={
+                        <div className="space-y-6">
+                            {/* File Operations */}
+                            <div>
+                                <h4 className="text-sm font-semibold text-gray-700 mb-3">File Operations</h4>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <button
+                                        onClick={() => handleEnhancedToast('upload')}
+                                        className="px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaUpload className="w-4 h-4" />
+                                        <span>Upload</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('download')}
+                                        className="px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaDownload className="w-4 h-4" />
+                                        <span>Download</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('camera')}
+                                        className="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaCamera className="w-4 h-4" />
+                                        <span>Photo</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('music')}
+                                        className="px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaMusic className="w-4 h-4" />
+                                        <span>Music</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Social & Engagement */}
+                            <div>
+                                <h4 className="text-sm font-semibold text-gray-700 mb-3">Social & Engagement</h4>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <button
+                                        onClick={() => handleEnhancedToast('like')}
+                                        className="px-3 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaHeart className="w-4 h-4" />
+                                        <span>Like</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('star')}
+                                        className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaStar className="w-4 h-4" />
+                                        <span>Star</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('thumbs')}
+                                        className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaThumbsUp className="w-4 h-4" />
+                                        <span>Thumbs</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('fire')}
+                                        className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaFire className="w-4 h-4" />
+                                        <span>Hot</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Special & Premium */}
+                            <div>
+                                <h4 className="text-sm font-semibold text-gray-700 mb-3">Special & Premium</h4>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <button
+                                        onClick={() => handleEnhancedToast('magic')}
+                                        className="px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 flex items-center space-x-2 transition-all"
+                                    >
+                                        <FaMagic className="w-4 h-4" />
+                                        <span>Magic</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('gem')}
+                                        className="px-3 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg hover:from-cyan-700 hover:to-blue-700 flex items-center space-x-2 transition-all"
+                                    >
+                                        <FaGem className="w-4 h-4" />
+                                        <span>Gem</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('crown')}
+                                        className="px-3 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 text-white rounded-lg hover:from-yellow-700 hover:to-orange-700 flex items-center space-x-2 transition-all"
+                                    >
+                                        <FaCrown className="w-4 h-4" />
+                                        <span>VIP</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('gift')}
+                                        className="px-3 py-2 bg-gradient-to-r from-red-600 to-pink-600 text-white rounded-lg hover:from-red-700 hover:to-pink-700 flex items-center space-x-2 transition-all"
+                                    >
+                                        <FaGift className="w-4 h-4" />
+                                        <span>Gift</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* System & Dev */}
+                            <div>
+                                <h4 className="text-sm font-semibold text-gray-700 mb-3">System & Development</h4>
+                                <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+                                    <button
+                                        onClick={() => handleEnhancedToast('rocket')}
+                                        className="px-3 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaRocket className="w-4 h-4" />
+                                        <span>Deploy</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('code')}
+                                        className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaCode className="w-4 h-4" />
+                                        <span>Code</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('database')}
+                                        className="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaDatabase className="w-4 h-4" />
+                                        <span>Database</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('security')}
+                                        className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaShieldAlt className="w-4 h-4" />
+                                        <span>Security</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('wifi')}
+                                        className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaWifi className="w-4 h-4" />
+                                        <span>WiFi</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('battery')}
+                                        className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaBatteryHalf className="w-4 h-4" />
+                                        <span>Battery</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Achievement & Ideas */}
+                            <div>
+                                <h4 className="text-sm font-semibold text-gray-700 mb-3">Achievement & Ideas</h4>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <button
+                                        onClick={() => handleEnhancedToast('trophy')}
+                                        className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaTrophy className="w-4 h-4" />
+                                        <span>Trophy</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('idea')}
+                                        className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaLightbulb className="w-4 h-4" />
+                                        <span>Idea</span>
+                                    </button>
+                                    <button
+                                        onClick={() => handleEnhancedToast('bolt')}
+                                        className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 flex items-center space-x-2 transition-colors"
+                                    >
+                                        <FaBolt className="w-4 h-4" />
+                                        <span>Boost</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    codeContent={enhancedToastCode}
+                />
+            </Container>
+
+            {/* Toast Templates */}
+            <Container className="p-6 mb-8">
+                <HeaderText
+                    TitleHeader="Toast Templates"
+                    title="Predefined Toast Configurations"
                 />
                 <CodePreviewToggle
                     previewContent={
                         <div className="space-y-4">
-                            <div className="flex space-x-4">
+                            <p className="text-sm text-gray-600 mb-4">
+                                Use predefined templates for common scenarios with optimized messages and durations.
+                            </p>
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                                <button
+                                    onClick={() => handleTemplateToast('fileUpload')}
+                                    className="px-3 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 text-sm transition-colors"
+                                >
+                                    File Upload
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('fileDownload')}
+                                    className="px-3 py-2 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 text-sm transition-colors"
+                                >
+                                    File Download
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('likeAdded')}
+                                    className="px-3 py-2 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 text-sm transition-colors"
+                                >
+                                    Like Added
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('starAdded')}
+                                    className="px-3 py-2 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 text-sm transition-colors"
+                                >
+                                    Star Added
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('securityAlert')}
+                                    className="px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 text-sm transition-colors"
+                                >
+                                    Security Alert
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('achievement')}
+                                    className="px-3 py-2 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 text-sm transition-colors"
+                                >
+                                    Achievement
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('idea')}
+                                    className="px-3 py-2 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 text-sm transition-colors"
+                                >
+                                    AI Idea
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('magic')}
+                                    className="px-3 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 text-sm transition-colors"
+                                >
+                                    Magic Event
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('connection')}
+                                    className="px-3 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 text-sm transition-colors"
+                                >
+                                    Connection
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('battery')}
+                                    className="px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 text-sm transition-colors"
+                                >
+                                    Low Battery
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('deploy')}
+                                    className="px-3 py-2 bg-orange-100 text-orange-700 rounded-lg hover:bg-orange-200 text-sm transition-colors"
+                                >
+                                    Deployment
+                                </button>
+                                <button
+                                    onClick={() => handleTemplateToast('backup')}
+                                    className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm transition-colors"
+                                >
+                                    Backup
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    codeContent={templateToastCode}
+                />
+            </Container>
+
+            {/* Multiple Toasts & Controls */}
+            <Container className="p-6 mb-8">
+                <HeaderText
+                    TitleHeader="Advanced Features"
+                    title="Multiple Toasts & Management"
+                />
+                <CodePreviewToggle
+                    previewContent={
+                        <div className="space-y-4">
+                            <div className="flex flex-wrap gap-3">
                                 <button
                                     onClick={handleMultipleToasts}
-                                    className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                                    className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all"
                                 >
                                     Show Multiple Toasts
                                 </button>
                                 <button
                                     onClick={removeAllToasts}
-                                    className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                                 >
                                     Clear All Toasts
                                 </button>
                             </div>
                         </div>
                     }
-                    codeContent={`// Show multiple toasts with delay
-addToast({ type: 'info', message: 'First toast', duration: 4000 });
-
-setTimeout(() => {
-    addToast({ type: 'success', message: 'Second toast', duration: 4000 });
-}, 1000);
+                    codeContent={`// Show multiple toasts with staggered timing
+const toastTypes = ['info', 'success', 'warning', 'magic', 'star'];
+toastTypes.forEach((type, index) => {
+    setTimeout(() => {
+        addToast({
+            type,
+            message: \`\${type.charAt(0).toUpperCase() + type.slice(1)} toast #\${index + 1}\`,
+            duration: 4000
+        });
+    }, index * 800);
+});
 
 // Clear all toasts
 removeAllToasts();`}
                 />
             </Container>
 
-            {/* Static Toast Components */}
+            {/* Static Components */}
             <Container className="p-6 mb-8">
                 <HeaderText
                     TitleHeader="Static Components"
@@ -382,30 +706,18 @@ removeAllToasts();`}
                 <CodePreviewToggle
                     previewContent={
                         <div className="space-y-4">
-                            <div className="flex space-x-4 mb-4">
+                            <div className="flex space-x-3 mb-4">
                                 <button
                                     onClick={() => setShowStaticExample('success')}
-                                    className={`px-3 py-1 rounded text-sm ${showStaticExample === 'success' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+                                    className={`px-3 py-1 rounded-lg text-sm transition-colors ${showStaticExample === 'success' ? 'bg-green-600 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
                                 >
                                     Success
                                 </button>
                                 <button
                                     onClick={() => setShowStaticExample('error')}
-                                    className={`px-3 py-1 rounded text-sm ${showStaticExample === 'error' ? 'bg-red-600 text-white' : 'bg-gray-200'}`}
+                                    className={`px-3 py-1 rounded-lg text-sm transition-colors ${showStaticExample === 'error' ? 'bg-red-600 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
                                 >
                                     Error
-                                </button>
-                                <button
-                                    onClick={() => setShowStaticExample('warning')}
-                                    className={`px-3 py-1 rounded text-sm ${showStaticExample === 'warning' ? 'bg-yellow-600 text-white' : 'bg-gray-200'}`}
-                                >
-                                    Warning
-                                </button>
-                                <button
-                                    onClick={() => setShowStaticExample('info')}
-                                    className={`px-3 py-1 rounded text-sm ${showStaticExample === 'info' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-                                >
-                                    Info
                                 </button>
                             </div>
 
@@ -415,6 +727,10 @@ removeAllToasts();`}
                                         title="Success!"
                                         message="Your profile has been updated successfully."
                                         onClose={() => console.log('Success toast closed')}
+                                        action={{
+                                            label: 'View Profile',
+                                            onClick: () => console.log('View profile clicked')
+                                        }}
                                     />
                                 )}
                                 {showStaticExample === 'error' && (
@@ -422,48 +738,37 @@ removeAllToasts();`}
                                         title="Error!"
                                         message="Failed to save changes. Please try again."
                                         onClose={() => console.log('Error toast closed')}
-                                    />
-                                )}
-                                {showStaticExample === 'warning' && (
-                                    <WarningToast
-                                        title="Warning!"
-                                        message="Your session will expire in 5 minutes."
-                                        onClose={() => console.log('Warning toast closed')}
-                                    />
-                                )}
-                                {showStaticExample === 'info' && (
-                                    <InfoToast
-                                        title="Information"
-                                        message="System maintenance scheduled for tonight."
-                                        onClose={() => console.log('Info toast closed')}
+                                        action={{
+                                            label: 'Retry',
+                                            onClick: () => console.log('Retry clicked')
+                                        }}
                                     />
                                 )}
                             </div>
                         </div>
                     }
-                    codeContent={staticToastCode}
-                />
-            </Container>
+                    codeContent={`import { SuccessToast, ErrorToast } from '@components/ui/toast/Toast';
 
-            {/* Hook Usage */}
-            <Container className="p-6 mb-8">
-                <HeaderText
-                    TitleHeader="Hook Usage"
-                    title="Using the useToast Hook"
-                />
-                <CodePreviewToggle
-                    previewContent={
-                        <div className="bg-gray-50 border rounded-lg p-4">
-                            <h4 className="font-semibold text-gray-900 mb-2">Available Methods</h4>
-                            <ul className="text-sm text-gray-700 space-y-1">
-                                <li>• <code className="bg-gray-200 px-1 rounded">addToast(options)</code> - Add a new toast</li>
-                                <li>• <code className="bg-gray-200 px-1 rounded">removeToast(id)</code> - Remove specific toast</li>
-                                <li>• <code className="bg-gray-200 px-1 rounded">removeAllToasts()</code> - Clear all toasts</li>
-                                <li>• <code className="bg-gray-200 px-1 rounded">toasts</code> - Array of current toasts</li>
-                            </ul>
-                        </div>
-                    }
-                    codeContent={hookUsageCode}
+// Enhanced static components with actions
+<SuccessToast 
+    title="Success!" 
+    message="Your profile has been updated successfully." 
+    onClose={() => console.log('Closed')}
+    action={{
+        label: 'View Profile',
+        onClick: () => console.log('Action clicked')
+    }}
+/>
+
+<ErrorToast 
+    title="Error!" 
+    message="Failed to save changes. Please try again." 
+    onClose={() => console.log('Closed')}
+    action={{
+        label: 'Retry',
+        onClick: () => console.log('Retry clicked')
+    }}
+/>`}
                 />
             </Container>
 
