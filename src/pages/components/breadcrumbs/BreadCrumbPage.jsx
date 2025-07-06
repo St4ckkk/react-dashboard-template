@@ -250,7 +250,7 @@ const BreadCrumbPage = () => {
                         />
                         <div className="mt-5 space-y-4">
                             <div>
-                                <p className="text-sm text-gray-600 mb-2">Chevron (>) - Most common</p>
+                                <p className="text-sm text-gray-600 mb-2">Chevron (&gt;) - Most common</p>
                                 <CustomDividerBreadcrumbs
                                     divider=">"
                                     items={[
