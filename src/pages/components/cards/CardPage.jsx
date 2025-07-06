@@ -4,6 +4,7 @@ import Container from '@components/ui/container/Container';
 import CodePreviewToggle from '@components/CodePreviewToggle';
 import HeaderText from '@components/HeaderText';
 import Button from '@components/ui/buttons/Button';
+import CardGuidelines from '@components/CardGuidelines';
 import { FaEllipsisV, FaFacebook, FaTwitter, FaInstagram, FaUsers, FaChartLine, FaShoppingCart } from 'react-icons/fa';
 
 import Card, {
@@ -334,8 +335,6 @@ const CardPage = () => {
                                             <p>Click this card to trigger an action.</p>
                                             <p className="mt-2 text-sm text-gray-500">Hover to see the scaling effect.</p>
                                         </InteractiveCard>
-
-
                                     </div>
                                 }
                                 codeContent={interactiveCardCode}
@@ -414,6 +413,9 @@ const CardPage = () => {
                         defaultView="preview"
                     />
                 </Container>
+
+                {/* Usage Guidelines */}
+                <CardGuidelines />
             </div>
         </DashboardLayout>
     );

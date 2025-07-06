@@ -43,7 +43,25 @@ import {
     FaLock,
     FaShieldAlt,
     FaUserCheck,
-    FaDatabase
+    FaDatabase,
+    FaUniversalAccess,
+    FaKeyboard,
+    FaSpinner,
+    FaClipboardList,
+    FaSearch,
+    FaFilter,
+    FaLayerGroup,
+    FaWindowMaximize,
+    FaChartLine,
+    FaUsers,
+    FaShoppingCart,
+    FaCalendar,
+    FaEnvelope,
+    FaGraduationCap,
+    FaHeadset,
+    FaCreditCard,
+    FaBookOpen,
+    FaCube
 } from 'react-icons/fa';
 
 const ModalPage = () => {
@@ -97,7 +115,9 @@ const ModalPage = () => {
     };
 
     // Code examples
-    const basicModalCode = `<BasicModal 
+    const basicModalCode = `import { BasicModal } from '@components/ui/modals/Modals';
+
+<BasicModal 
   isOpen={isOpen} 
   onClose={() => setIsOpen(false)} 
   title="Modal title"
@@ -105,103 +125,149 @@ const ModalPage = () => {
   <p>Modal content goes here...</p>
 </BasicModal>`;
 
-    const centeredModalCode = `<VerticallyCenteredModal 
+    const centeredModalCode = `import { VerticallyCenteredModal } from '@components/ui/modals/Modals';
+
+<VerticallyCenteredModal 
   isOpen={isOpen} 
   onClose={() => setIsOpen(false)} 
   title="Vertically centered modal"
+  centered={true}
 />`;
 
-    const sizesCode = `// Small Modal
+    const sizesCode = `import { SmallModal, LargeModal, ExtraLargeModal, FullscreenModal } from '@components/ui/modals/Modals';
+
+// Small Modal (max-width: 300px)
 <SmallModal isOpen={isOpen} onClose={onClose} />
 
-// Large Modal  
+// Large Modal (max-width: 800px)  
 <LargeModal isOpen={isOpen} onClose={onClose} />
 
-// Extra Large Modal
+// Extra Large Modal (max-width: 1140px)
 <ExtraLargeModal isOpen={isOpen} onClose={onClose} />
 
-// Fullscreen Modal
+// Fullscreen Modal (100% viewport)
 <FullscreenModal isOpen={isOpen} onClose={onClose} />`;
 
-    const scrollableCode = `<ScrollableModal 
+    const scrollableCode = `import { ScrollableModal } from '@components/ui/modals/Modals';
+
+<ScrollableModal 
   isOpen={isOpen} 
   onClose={onClose} 
   title="Scrollable modal"
+  scrollable={true}
 />`;
 
-    const disabledBackdropCode = `<DisabledBackdropModal 
+    const disabledBackdropCode = `import { DisabledBackdropModal } from '@components/ui/modals/Modals';
+
+<DisabledBackdropModal 
   isOpen={isOpen} 
   onClose={onClose} 
   backdrop={false}
+  keyboard={false}
 />`;
 
-    const confirmationCode = `<ConfirmationModal 
+    const confirmationCode = `import { ConfirmationModal } from '@components/ui/modals/Modals';
+
+<ConfirmationModal 
   isOpen={isOpen} 
   onClose={onClose} 
   onConfirm={handleConfirm}
   title="Delete Item"
   message="Are you sure you want to delete this item?"
   variant="danger"
+  confirmText="Delete"
+  cancelText="Cancel"
 />`;
 
-    const formModalCode = `<FormModal 
+    const formModalCode = `import { FormModal } from '@components/ui/modals/Modals';
+
+<FormModal 
   isOpen={isOpen} 
   onClose={onClose} 
   onSubmit={handleFormSubmit}
   title="Contact Form"
+  submitText="Send Message"
 />`;
 
-    const disabledAnimationCode = `<DisabledAnimationModal 
+    const disabledAnimationCode = `import { DisabledAnimationModal } from '@components/ui/modals/Modals';
+
+<DisabledAnimationModal 
   isOpen={isOpen} 
   onClose={onClose} 
   fade={false}
+  animation={false}
 />`;
 
-    const loadingModalCode = `<LoadingModal 
+    const loadingModalCode = `import { LoadingModal } from '@components/ui/modals/Modals';
+
+<LoadingModal 
   isOpen={isOpen} 
   title="Processing..." 
   message="Please wait while we process your request."
+  spinner={true}
 />`;
 
-    const imagePreviewCode = `<ImagePreviewModal 
+    const imagePreviewCode = `import { ImagePreviewModal } from '@components/ui/modals/Modals';
+
+<ImagePreviewModal 
   isOpen={isOpen} 
   onClose={onClose} 
   imageUrl="/path/to/image.jpg"
   title="Image Preview"
+  allowDownload={true}
 />`;
 
-    const videoModalCode = `<VideoModal 
+    const videoModalCode = `import { VideoModal } from '@components/ui/modals/Modals';
+
+<VideoModal 
   isOpen={isOpen} 
   onClose={onClose} 
   videoUrl="/path/to/video.mp4"
   title="Video Player"
+  autoplay={false}
+  controls={true}
 />`;
 
-    const settingsModalCode = `<SettingsModal 
+    const settingsModalCode = `import { SettingsModal } from '@components/ui/modals/Modals';
+
+<SettingsModal 
   isOpen={isOpen} 
   onClose={onClose} 
   title="Application Settings"
+  onSave={handleSettingsSave}
 />`;
 
-    const fileUploadCode = `<FileUploadModal 
+    const fileUploadCode = `import { FileUploadModal } from '@components/ui/modals/Modals';
+
+<FileUploadModal 
   isOpen={isOpen} 
   onClose={onClose} 
   onFileUpload={handleFileUpload}
   title="Upload Documents"
+  acceptedTypes={['.pdf', '.jpg', '.png']}
+  maxSize={10} // MB
+  multiple={true}
 />`;
 
-    const successModalCode = `<SuccessModal 
+    const successModalCode = `import { SuccessModal } from '@components/ui/modals/Modals';
+
+<SuccessModal 
   isOpen={isOpen} 
   onClose={onClose} 
   title="Success!" 
   message="Your operation completed successfully."
+  autoClose={3000}
 />`;
 
-    const errorModalCode = `<ErrorModal 
+    const errorModalCode = `import { ErrorModal } from '@components/ui/modals/Modals';
+
+<ErrorModal 
   isOpen={isOpen} 
   onClose={onClose} 
   title="Error Occurred" 
   message="Something went wrong. Please try again."
+  showRetry={true}
+  onRetry={handleRetry}
 />`;
 
     return (
@@ -664,6 +730,26 @@ const ModalPage = () => {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-green-900 mb-1">Process Feedback</h4>
+                                            <p className="text-sm text-green-700">Loading states, success/error notifications, progress updates</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-green-900 mb-1">Focused Tasks</h4>
+                                            <p className="text-sm text-green-700">Tasks requiring user attention without navigation away from current context</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -707,6 +793,26 @@ const ModalPage = () => {
                                         <div>
                                             <h4 className="font-semibold text-red-900 mb-1">Mobile-Heavy Apps</h4>
                                             <p className="text-sm text-red-700">Be cautious on mobile - consider full-screen alternatives for better UX</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaTimesCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-red-900 mb-1">Content Comparison</h4>
+                                            <p className="text-sm text-red-700">When users need to compare multiple items side by side</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaTimesCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-red-900 mb-1">Nested Modals</h4>
+                                            <p className="text-sm text-red-700">Avoid stacking modals - it creates confusion and poor user experience</p>
                                         </div>
                                     </div>
                                 </div>
@@ -776,6 +882,36 @@ const ModalPage = () => {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaSpinner className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Loading</h4>
+                                            <p className="text-sm text-indigo-700">Process feedback and blocking operations</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaBell className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-emerald-900 mb-1">Notifications</h4>
+                                            <p className="text-sm text-emerald-700">Success, error, warning, and info messages</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-cyan-50 rounded-lg border border-cyan-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaQuestionCircle className="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-cyan-900 mb-1">Help & Tooltips</h4>
+                                            <p className="text-sm text-cyan-700">Contextual help and detailed explanations</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -787,8 +923,8 @@ const ModalPage = () => {
                                     <div className="flex items-start space-x-3">
                                         <FaMobile className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                                         <div>
-                                            <h4 className="font-semibold text-blue-900 mb-1">Small</h4>
-                                            <p className="text-sm text-blue-700">Confirmations, alerts, simple forms</p>
+                                            <h4 className="font-semibold text-blue-900 mb-1">Small (300px)</h4>
+                                            <p className="text-sm text-blue-700">Confirmations, alerts, simple yes/no dialogs</p>
                                         </div>
                                     </div>
                                 </div>
@@ -797,8 +933,8 @@ const ModalPage = () => {
                                     <div className="flex items-start space-x-3">
                                         <FaDesktop className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                                         <div>
-                                            <h4 className="font-semibold text-green-900 mb-1">Default</h4>
-                                            <p className="text-sm text-green-700">General content, basic forms</p>
+                                            <h4 className="font-semibold text-green-900 mb-1">Default (500px)</h4>
+                                            <p className="text-sm text-green-700">General content, basic forms, standard dialogs</p>
                                         </div>
                                     </div>
                                 </div>
@@ -807,18 +943,18 @@ const ModalPage = () => {
                                     <div className="flex items-start space-x-3">
                                         <FaFileAlt className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
                                         <div>
-                                            <h4 className="font-semibold text-orange-900 mb-1">Large</h4>
-                                            <p className="text-sm text-orange-700">Complex forms, detailed content</p>
+                                            <h4 className="font-semibold text-orange-900 mb-1">Large (800px)</h4>
+                                            <p className="text-sm text-orange-700">Complex forms, detailed content, settings panels</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
                                     <div className="flex items-start space-x-3">
-                                        <FaImage className="w-5 h-5 text-purple-500 mt-0.5 flex-shrink-0" />
+                                        <FaWindowMaximize className="w-5 h-5 text-purple-500 mt-0.5 flex-shrink-0" />
                                         <div>
                                             <h4 className="font-semibold text-purple-900 mb-1">Fullscreen</h4>
-                                            <p className="text-sm text-purple-700">Media viewing, data tables</p>
+                                            <p className="text-sm text-purple-700">Media viewing, data tables, complex interfaces</p>
                                         </div>
                                     </div>
                                 </div>
@@ -839,6 +975,7 @@ const ModalPage = () => {
                                                 <li>• Use descriptive titles and clear call-to-action buttons</li>
                                                 <li>• Ensure modals are keyboard accessible</li>
                                                 <li>• Avoid opening modals from within other modals</li>
+                                                <li>• Don't use modals for critical workflow steps</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -854,6 +991,7 @@ const ModalPage = () => {
                                                 <li>• Use scrollable content for long text rather than very tall modals</li>
                                                 <li>• Place primary actions on the right, secondary on the left</li>
                                                 <li>• Maintain consistent spacing and typography</li>
+                                                <li>• Use appropriate modal size for content complexity</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -861,14 +999,31 @@ const ModalPage = () => {
 
                                 <div className="p-4 bg-green-50 rounded-lg border border-green-200">
                                     <div className="flex items-start space-x-3">
-                                        <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                                        <FaUniversalAccess className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                                         <div>
-                                            <h4 className="font-semibold text-green-900 mb-2">Performance & Accessibility</h4>
+                                            <h4 className="font-semibold text-green-900 mb-2">Accessibility & Usability</h4>
                                             <ul className="text-sm text-green-700 space-y-1">
                                                 <li>• Implement proper focus management and ARIA attributes</li>
                                                 <li>• Use semantic HTML elements within modal content</li>
                                                 <li>• Test with screen readers and keyboard navigation</li>
                                                 <li>• Consider animation preferences (prefers-reduced-motion)</li>
+                                                <li>• Ensure sufficient color contrast for all modal content</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaSpinner className="w-5 h-5 text-purple-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-purple-900 mb-2">Performance & State Management</h4>
+                                            <ul className="text-sm text-purple-700 space-y-1">
+                                                <li>• Lazy load modal content when possible to improve performance</li>
+                                                <li>• Preserve form state appropriately during modal interactions</li>
+                                                <li>• Handle loading states and error conditions gracefully</li>
+                                                <li>• Clean up event listeners and timers when modals close</li>
+                                                <li>• Consider using portal patterns for better DOM structure</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -878,7 +1033,7 @@ const ModalPage = () => {
 
                         {/* Common Use Cases */}
                         <div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Common Use Cases</h3>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Common Use Cases by Context</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                 <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                                     <FaTrash className="w-6 h-6 text-gray-600 mb-2" />
@@ -903,7 +1058,137 @@ const ModalPage = () => {
                                     <h4 className="font-semibold text-gray-900 mb-1">User Onboarding</h4>
                                     <p className="text-sm text-gray-600">Welcome messages and feature introductions</p>
                                 </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaShoppingCart className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Shopping Cart</h4>
+                                    <p className="text-sm text-gray-600">Quick add to cart and checkout previews</p>
+                                </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaEnvelope className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Contact Forms</h4>
+                                    <p className="text-sm text-gray-600">Quick contact and feedback collection</p>
+                                </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaCalendar className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Event Details</h4>
+                                    <p className="text-sm text-gray-600">Calendar event information and actions</p>
+                                </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaHeadset className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Support Chat</h4>
+                                    <p className="text-sm text-gray-600">Customer support and help interfaces</p>
+                                </div>
                             </div>
+                        </div>
+
+                        {/* Alternative Patterns */}
+                        <div>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Alternative UI Patterns</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaLayerGroup className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Drawer/Sidebar</h4>
+                                            <p className="text-sm text-indigo-700">Slide-in panels for forms, filters, or additional content from screen edges.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaChartLine className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Inline Editing</h4>
+                                            <p className="text-sm text-indigo-700">Edit content directly within the page context without modal overlays.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaSearch className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Dropdown Panels</h4>
+                                            <p className="text-sm text-indigo-700">Contextual panels that drop down from triggers for quick actions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaBookOpen className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Page Navigation</h4>
+                                            <p className="text-sm text-indigo-700">Dedicated pages for complex forms and workflows requiring full attention.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaBell className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Toast Notifications</h4>
+                                            <p className="text-sm text-indigo-700">Non-blocking notifications for feedback that don't require user interaction.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaCube className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Expandable Cards</h4>
+                                            <p className="text-sm text-indigo-700">Cards that expand in place to show additional content and actions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Container>
+
+                {/* Quick Reference */}
+                <Container>
+                    <HeaderText
+                        TitleHeader="Quick Reference Guide"
+                        title="At a Glance Recommendations"
+                    />
+
+                    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+                            <h4 className="font-semibold text-red-900 mb-2">Critical Actions</h4>
+                            <p className="text-sm text-red-700">Use <strong>Confirmation Modals</strong> for destructive actions like delete or logout.</p>
+                        </div>
+
+                        <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                            <h4 className="font-semibold text-green-900 mb-2">Quick Data Entry</h4>
+                            <p className="text-sm text-green-700">Use <strong>Form Modals</strong> for simple forms that don't require full page focus.</p>
+                        </div>
+
+                        <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                            <h4 className="font-semibold text-purple-900 mb-2">Media Preview</h4>
+                            <p className="text-sm text-purple-700">Use <strong>Image/Video Modals</strong> for lightbox-style media viewing experiences.</p>
+                        </div>
+
+                        <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h4 className="font-semibold text-blue-900 mb-2">Process Feedback</h4>
+                            <p className="text-sm text-blue-700">Use <strong>Loading/Success/Error Modals</strong> for operation status and feedback.</p>
+                        </div>
+
+                        <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
+                            <h4 className="font-semibold text-orange-900 mb-2">File Operations</h4>
+                            <p className="text-sm text-orange-700">Use <strong>File Upload Modals</strong> for drag-and-drop file handling with progress.</p>
+                        </div>
+
+                        <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <h4 className="font-semibold text-gray-900 mb-2">Settings & Config</h4>
+                            <p className="text-sm text-gray-700">Use <strong>Settings Modals</strong> for preference panels and configuration options.</p>
                         </div>
                     </div>
                 </Container>

@@ -25,8 +25,8 @@ const DashboardLayout = ({
                             <Link
                                 to={item.href}
                                 className={`text-xs md:text-sm transition-colors duration-200 ease-in-out ${index === breadcrumb.length - 1 ?
-                                        "text-gray-500" :
-                                        "text-blue-500 hover:text-blue-700"
+                                    "text-gray-500" :
+                                    "text-blue-500 hover:text-blue-700"
                                     }`}
                             >
                                 {item.name}
@@ -137,7 +137,7 @@ const DashboardLayout = ({
                     <motion.div variants={contentVariants}>
                         {children}
                     </motion.div>
-                </motion.main>A
+                </motion.main>
             </div>
             <Footer />
         </div>

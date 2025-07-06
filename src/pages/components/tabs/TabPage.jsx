@@ -41,7 +41,18 @@ import {
     FaMobile,
     FaDesktop,
     FaPalette,
-    FaCode
+    FaCode,
+    FaKeyboard,
+    FaSearch,
+    FaFilter,
+    FaSort,
+    FaLayerGroup,
+    FaUniversalAccess,
+    FaSpinner,
+    FaArrowRight,
+    FaClipboardList,
+    FaEdit,
+    FaTable
 } from 'react-icons/fa';
 
 const TabPage = () => {
@@ -860,6 +871,52 @@ const closableTabs = [
                             </div>
                         </div>
 
+                        {/* Layout & Orientation Guidelines */}
+                        <div>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Layout and Orientation Guidelines</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaArrowRight className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-blue-900 mb-1">Horizontal Tabs</h4>
+                                            <p className="text-sm text-blue-700">Standard for most interfaces, main content navigation, dashboard sections.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaLayerGroup className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-green-900 mb-1">Vertical Tabs</h4>
+                                            <p className="text-sm text-green-700">Great for sidebars, settings panels, and when you have many tab options.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaTable className="w-5 h-5 text-purple-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-purple-900 mb-1">Justified Layout</h4>
+                                            <p className="text-sm text-purple-700">Use when tabs should fill the container width evenly, good for 2-4 tabs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaMobile className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-orange-900 mb-1">Responsive Design</h4>
+                                            <p className="text-sm text-orange-700">Consider scrollable tabs or dropdown conversion for mobile devices.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Best Practices */}
                         <div>
                             <h3 className="text-lg font-semibold text-gray-900 mb-4">Best Practices</h3>
@@ -883,12 +940,12 @@ const closableTabs = [
                                     <div className="flex items-start space-x-3">
                                         <FaInfoCircle className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                                         <div>
-                                            <h4 className="font-semibold text-blue-900 mb-2">Accessibility & UX</h4>
+                                            <h4 className="font-semibold text-blue-900 mb-2">Interaction & Behavior</h4>
                                             <ul className="text-sm text-blue-700 space-y-1">
-                                                <li>• Ensure tabs are keyboard accessible (Tab, Arrow keys)</li>
-                                                <li>• Provide clear visual feedback for active and focus states</li>
-                                                <li>• Consider ARIA labels for screen readers</li>
-                                                <li>• Test on mobile devices for touch accessibility</li>
+                                                <li>• Provide immediate visual feedback for tab changes</li>
+                                                <li>• Use smooth transitions between tab content</li>
+                                                <li>• Consider lazy loading for content-heavy tabs</li>
+                                                <li>• Implement proper loading states for dynamic content</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -896,14 +953,29 @@ const closableTabs = [
 
                                 <div className="p-4 bg-green-50 rounded-lg border border-green-200">
                                     <div className="flex items-start space-x-3">
-                                        <FaCheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                                        <FaUniversalAccess className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                                         <div>
-                                            <h4 className="font-semibold text-green-900 mb-2">Performance & State</h4>
+                                            <h4 className="font-semibold text-green-900 mb-2">Accessibility & Usability</h4>
                                             <ul className="text-sm text-green-700 space-y-1">
-                                                <li>• Lazy load tab content when possible</li>
-                                                <li>• Preserve form state when switching tabs</li>
-                                                <li>• Consider URL routing for shareable tab states</li>
-                                                <li>• Animate transitions smoothly but not excessively</li>
+                                                <li>• Ensure tabs are keyboard accessible (Tab, Arrow keys)</li>
+                                                <li>• Provide clear visual feedback for active and focus states</li>
+                                                <li>• Use proper ARIA attributes for screen readers</li>
+                                                <li>• Make touch targets at least 44px for mobile interfaces</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaSpinner className="w-5 h-5 text-purple-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-purple-900 mb-2">Performance & State</h4>
+                                            <ul className="text-sm text-purple-700 space-y-1">
+                                                <li>• Lazy load tab content when possible to improve initial load time</li>
+                                                <li>• Preserve form state when switching between tabs</li>
+                                                <li>• Consider URL routing for bookmarkable tab states</li>
+                                                <li>• Cache tab content to avoid unnecessary re-renders</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -913,7 +985,7 @@ const closableTabs = [
 
                         {/* Common Use Cases */}
                         <div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Common Use Cases</h3>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Common Use Cases by Context</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                 <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                                     <FaChartBar className="w-6 h-6 text-gray-600 mb-2" />
@@ -938,7 +1010,117 @@ const closableTabs = [
                                     <h4 className="font-semibold text-gray-900 mb-1">Settings</h4>
                                     <p className="text-sm text-gray-600">General, Privacy, Notifications, Account</p>
                                 </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaEdit className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Content Management</h4>
+                                    <p className="text-sm text-gray-600">Edit, Preview, SEO, Publishing</p>
+                                </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaClipboardList className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Form Sections</h4>
+                                    <p className="text-sm text-gray-600">Personal Info, Contact, Preferences, Review</p>
+                                </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaCalendar className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Data Views</h4>
+                                    <p className="text-sm text-gray-600">Day, Week, Month, Year views</p>
+                                </div>
+
+                                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <FaFileAlt className="w-6 h-6 text-gray-600 mb-2" />
+                                    <h4 className="font-semibold text-gray-900 mb-1">Document Editors</h4>
+                                    <p className="text-sm text-gray-600">Multiple open documents, different file types</p>
+                                </div>
                             </div>
+                        </div>
+
+                        {/* Alternative Patterns */}
+                        <div>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Alternative Navigation Patterns</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaLayerGroup className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Accordion/Collapsible</h4>
+                                            <p className="text-sm text-indigo-700">Better when content needs to be compared or when space is very limited.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaArrowRight className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Step Progress</h4>
+                                            <p className="text-sm text-indigo-700">Perfect for sequential workflows, forms, onboarding, or checkout processes.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaSearch className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Dropdown Navigation</h4>
+                                            <p className="text-sm text-indigo-700">Space-saving alternative when you have many options or limited screen space.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                    <div className="flex items-start space-x-3">
+                                        <FaFilter className="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-semibold text-indigo-900 mb-1">Filter/Toggle Chips</h4>
+                                            <p className="text-sm text-indigo-700">When users need to select multiple options or filter content dynamically.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Container>
+
+                {/* Quick Reference */}
+                <Container>
+                    <HeaderText
+                        TitleHeader="Quick Reference Guide"
+                        title="At a Glance Recommendations"
+                    />
+
+                    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h4 className="font-semibold text-blue-900 mb-2">Content Organization</h4>
+                            <p className="text-sm text-blue-700">Use <strong>Default</strong> or <strong>Underline</strong> tabs for professional content sections.</p>
+                        </div>
+
+                        <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                            <h4 className="font-semibold text-green-900 mb-2">Modern Interfaces</h4>
+                            <p className="text-sm text-green-700">Use <strong>Pills</strong> or <strong>Filled</strong> tabs for creative and modern applications.</p>
+                        </div>
+
+                        <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                            <h4 className="font-semibold text-purple-900 mb-2">Settings & Admin</h4>
+                            <p className="text-sm text-purple-700">Use <strong>Bordered</strong> or <strong>Vertical Pills</strong> for structured administrative interfaces.</p>
+                        </div>
+
+                        <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
+                            <h4 className="font-semibold text-orange-900 mb-2">Notifications & Status</h4>
+                            <p className="text-sm text-orange-700">Use <strong>Badge Tabs</strong> to show counts, notifications, or status indicators.</p>
+                        </div>
+
+                        <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+                            <h4 className="font-semibold text-red-900 mb-2">Document/Code Editors</h4>
+                            <p className="text-sm text-red-700">Use <strong>Closable Tabs</strong> for multi-document interfaces and file management.</p>
+                        </div>
+
+                        <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <h4 className="font-semibold text-gray-900 mb-2">Mobile & Compact</h4>
+                            <p className="text-sm text-gray-700">Use <strong>Small Size</strong> tabs or consider alternative patterns for mobile-first designs.</p>
                         </div>
                     </div>
                 </Container>

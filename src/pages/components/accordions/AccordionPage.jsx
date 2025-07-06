@@ -1,6 +1,7 @@
 import DashboardLayout from '@components/DashboardLayout';
 import Container from '@components/ui/container/Container';
 import Accordion from '@components/ui/accordions/Accordion';
+import AccordionGuidelines from '@components/AccordionGuidelines';
 import CodePreviewToggle from '@components/CodePreviewToggle';
 
 const AccordionPage = () => {
@@ -73,7 +74,8 @@ const AccordionPage = () => {
                 { name: 'Accordion', href: '/components/accordions' }
             ]}
         >
-            <div className="grid grid-cols-2 gap-6">
+            {/* Component Examples */}
+            <div className="grid grid-cols-2 gap-6 mb-8">
                 <Container className="p-5">
                     <CodePreviewToggle
                         previewContent={
@@ -102,6 +104,9 @@ const AccordionPage = () => {
                     />
                 </Container>
             </div>
+
+            {/* Usage Guidelines */}
+            <AccordionGuidelines />
         </DashboardLayout>
     )
 }

@@ -28,7 +28,8 @@ import MonitoringRequest from '@pages/monitoring/MonitoringRequest'
 import ManageOfficials from '@pages/officials/ManageOfficials'
 import ManageResidents from '@pages/residents/ManageResidents'
 import Profile from '@pages/settings/Profile'
-import ProgressPage from './pages/components/progress/ProgressPage'
+import ProgressPage from '@pages/components/progress/ProgressPage'
+import SpinnerPage from '@pages/components/spinners/SpinnerPage'
 
 function App() {
   return (
@@ -56,7 +57,7 @@ function App() {
         <Route path="/components/tabs" element={<TabPage />} />
         <Route path="/components/pagination" element={<PaginationPage />} />
         <Route path="/components/progress" element={<ProgressPage />} />
-        <Route path="/components/spinners" element={<ComingSoon />} />
+        <Route path="/components/spinners" element={<SpinnerPage />} />
         <Route path="/components/tooltips" element={<ComingSoon />} />
         <Route path="/components/dropdowns" element={<ComingSoon />} />
         <Route path="/components/formfields" element={<ComingSoon />} />

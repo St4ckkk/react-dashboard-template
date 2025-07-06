@@ -3,6 +3,7 @@ import DashboardLayout from '@components/DashboardLayout';
 import Container from '@components/ui/container/Container';
 import CodePreviewToggle from '@components/CodePreviewToggle';
 import HeaderText from '@components/HeaderText';
+import CarouselGuidelines from '@components/CarouselGuidelines';
 
 import Carousel, {
     SlidesOnlyCarousel,
@@ -295,6 +296,9 @@ const CarouselPage = () => {
                         />
                     </div>
                 </Container>
+
+                {/* Usage Guidelines */}
+                <CarouselGuidelines />
             </div>
         </DashboardLayout>
     );

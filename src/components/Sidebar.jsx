@@ -8,7 +8,7 @@ import {
     FiAlertTriangle, FiGrid, FiStar, FiChevronsRight,
     FiSquare, FiBox, FiMonitor, FiList, FiColumns,
     FiSliders, FiMoreHorizontal, FiLoader, FiRotateCcw,
-    FiHelpCircle, FiBook, FiUserPlus, FiUsers
+    FiHelpCircle, FiBook, FiUserPlus, FiUsers,
 } from 'react-icons/fi';
 import { Link, useLocation } from 'react-router-dom';
 import Avatar from '@components/Avatar';
@@ -143,6 +143,12 @@ const Sidebar = ({ onClose }) => {
                     label: 'Tooltips',
                     path: '/components/tooltips',
                     active: url === '/components/tooltips'
+                },
+                {
+                    icon: <FiBox className="w-3 h-3 md:w-4 md:h-4" />,
+                    label: 'Toast',
+                    path: '/components/toast',
+                    active: url === '/components/toast'
                 }
             ]
         },

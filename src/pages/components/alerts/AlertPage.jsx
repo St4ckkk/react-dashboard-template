@@ -1,8 +1,9 @@
-
+import { useState } from 'react';
 import DashboardLayout from '@components/DashboardLayout';
 import Container from '@components/ui/container/Container';
 import HeaderText from '@components/HeaderText';
 import CodePreviewToggle from '@components/CodePreviewToggle';
+import AlertGuidelines from '@components/AlertGuidelines';
 import DefaultPreview from './DefaultPreview';
 import SolidPreview from './SolidPreview';
 import IconPreview from './IconPreview';
@@ -10,7 +11,7 @@ import OutlinePreview from './OutlinePreview';
 import WithHeadingSeparatorPreview from './WithHeadingSeparatorPreview';
 
 const Alerts = () => {
-
+    const [alerts, setAlerts] = useState({});
 
     const handleDismiss = (alertKey) => {
         setAlerts(prev => ({
@@ -27,7 +28,6 @@ const Alerts = () => {
   variant="primary"
   onDismiss={() => handleDismiss('primary')}
 />`;
-
 
     const defaultAlertCode = `// Default Alert Example
 <DefaultAlert
@@ -51,15 +51,6 @@ const Alerts = () => {
   onDismiss={() => handleDismiss('withIconPrimary')}
 />`;
 
-    const solidIconAlertCode = `// Solid Alert with Icon Example
-<AlertWithIcon
-  message="A simple primary alert with solid background and icon"
-  variant="primary"
-  icon={<FiInfo className="w-5 h-5" />}
-  solid={true}
-  onDismiss={() => handleDismiss('solidWithIconPrimary')}
-/>`;
-
     const outlineAlertCode = `// Outline Alert Example
 <OutlineAlert
   message="A simple primary outlined alert—check it out!"
@@ -76,7 +67,8 @@ const Alerts = () => {
                 { name: 'Alerts', href: '/components/alerts' }
             ]}
         >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Component Examples */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                 <Container className="p-5">
                     <HeaderText
                         TitleHeader="Default"
@@ -110,8 +102,6 @@ const Alerts = () => {
                     />
                 </Container>
 
-
-
                 <Container className="p-5 h-170">
                     <HeaderText
                         TitleHeader="Outline"
@@ -134,6 +124,9 @@ const Alerts = () => {
                     />
                 </Container>
             </div>
+
+            {/* Usage Guidelines */}
+            <AlertGuidelines />
         </DashboardLayout>
     );
 };
