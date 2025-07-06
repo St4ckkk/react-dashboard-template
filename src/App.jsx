@@ -17,7 +17,7 @@ const ComingSoon = lazy(() => import('@pages/ComingSoon'))
 const AccordionPage = lazy(() => import('@pages/components/accordions/AccordionPage'))
 const AlertPage = lazy(() => import('@pages/components/alerts/AlertPage'))
 const BadgePage = lazy(() => import('@pages/components/badges/BadgePage'))
-const BreadcrumbPage = lazy(() => import('@pages/components/breadcrumbs/BreadCrumbPage'))
+const BreadCrumbPage = lazy(() => import('@pages/components/breadcrumbs/BreadCrumbPage'))
 const ButtonsPage = lazy(() => import('@pages/components/buttons/ButtonPage'))
 const CardsPage = lazy(() => import('@pages/components/cards/CardPage'))
 const CarouselsPage = lazy(() => import('@pages/components/carousels/CarouselPage'))
@@ -137,7 +137,7 @@ function App() {
 
         <Route path="/components/breadcrumbs" element={
           <RouteGroup fallback={<PageLoadingSpinner variant="components" />}>
-            <BreadcrumbPage />
+            <BreadCrumbPage />
           </RouteGroup>
         } />
 

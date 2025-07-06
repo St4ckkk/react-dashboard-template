@@ -71,7 +71,7 @@ import {
     FaAngleDoubleRight
 } from 'react-icons/fa';
 
-const BreadcrumbGuidelines = () => {
+const BreadCrumbGuidelines = () => {
     return (
         <>
             {/* Usage Guidelines */}
@@ -561,4 +561,4 @@ const BreadcrumbGuidelines = () => {
     );
 };
 
-export default BreadcrumbGuidelines;
+export default BreadCrumbGuidelines;

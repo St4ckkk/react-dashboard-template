@@ -3,11 +3,11 @@ import Container from '@components/ui/container/Container';
 import CodeBlock from '@components/CodeBlock';
 import CodePreviewToggle from '@components/CodePreviewToggle';
 import HeaderText from '@components/HeaderText';
-import BreadcrumbGuidelines from '@components/BreadcrumbGuidelines';
+import BreadCrumbGuidelines from '@components/BreadCrumbGuidelines';
 import {
     DefaultBreadcrumbs,
     BreadcrumbsWithPageTitle,
-    CenteredBreadcrumbs,
+    CenteredBreadcrumbs,    
     RightBreadcrumbs,
     CustomDividerBreadcrumbs,
     IconBreadcrumbs
@@ -381,7 +381,7 @@ const BreadCrumbPage = () => {
                 </Container>
 
                 {/* Usage Guideliness */}
-                <BreadcrumbGuidelines />
+                <BreadCrumbGuidelines />
             </div>
         </DashboardLayout>
     );
