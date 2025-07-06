@@ -32,17 +32,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'vendor_react'
-            if (id.includes('tailwindcss')) return 'vendor_tailwind'
-            return 'vendor'
-          }
-          if (id.includes('/src/pages/')) return 'pages'
-          if (id.includes('/src/components/')) return 'components'
-        },
+        manualChunks: undefined,
       },
     },
-    chunkSizeWarningLimit: 1000, // Optional: suppress warning if chunks are intentionally large
   },
 })
