@@ -3,32 +3,45 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),
-  tailwindcss()
-  ],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@': path.resolve(import.meta.dirname, 'src'),
-      '@components': path.resolve(import.meta.dirname, 'src/components'),
-      '@ui': path.resolve(import.meta.dirname, 'src/components/ui'),
-      '@accordions': path.resolve(import.meta.dirname, 'src/components/ui/accordions'),
-      '@alerts': path.resolve(import.meta.dirname, 'src/components/ui/alerts'),
-      '@badges': path.resolve(import.meta.dirname, 'src/components/ui/badges'),
-      '@breadcrumbs': path.resolve(import.meta.dirname, 'src/components/ui/breadcrumbs'),
-      '@buttons': path.resolve(import.meta.dirname, 'src/components/ui/buttons'),
-      '@calendar': path.resolve(import.meta.dirname, 'src/components/ui/calendar'),
-      '@cards': path.resolve(import.meta.dirname, 'src/components/ui/cards'),
-      '@dropdowns': path.resolve(import.meta.dirname, 'src/components/ui/dropdowns'),
-      '@formfields': path.resolve(import.meta.dirname, 'src/components/ui/formfields'),
-      '@modals': path.resolve(import.meta.dirname, 'src/components/ui/modals'),
-      '@table': path.resolve(import.meta.dirname, 'src/components/ui/table'),
-      '@pagination': path.resolve(import.meta.dirname, 'src/components/ui/pagination'),
-      '@hooks': path.resolve(import.meta.dirname, 'src/hooks'),
-      '@pages': path.resolve(import.meta.dirname, 'src/pages'),
-      '@assets': path.resolve(import.meta.dirname, 'src/assets'),
-      '@libs': path.resolve(import.meta.dirname, 'src/libs'),
+      '@': path.resolve(__dirname, 'src'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@ui': path.resolve(__dirname, 'src/components/ui'),
+      '@accordions': path.resolve(__dirname, 'src/components/ui/accordions'),
+      '@alerts': path.resolve(__dirname, 'src/components/ui/alerts'),
+      '@badges': path.resolve(__dirname, 'src/components/ui/badges'),
+      '@breadcrumbs': path.resolve(__dirname, 'src/components/ui/breadcrumbs'),
+      '@buttons': path.resolve(__dirname, 'src/components/ui/buttons'),
+      '@calendar': path.resolve(__dirname, 'src/components/ui/calendar'),
+      '@cards': path.resolve(__dirname, 'src/components/ui/cards'),
+      '@dropdowns': path.resolve(__dirname, 'src/components/ui/dropdowns'),
+      '@formfields': path.resolve(__dirname, 'src/components/ui/formfields'),
+      '@modals': path.resolve(__dirname, 'src/components/ui/modals'),
+      '@table': path.resolve(__dirname, 'src/components/ui/table'),
+      '@pagination': path.resolve(__dirname, 'src/components/ui/pagination'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@libs': path.resolve(__dirname, 'src/libs'),
     },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) return 'vendor_react'
+            if (id.includes('tailwindcss')) return 'vendor_tailwind'
+            return 'vendor'
+          }
+          if (id.includes('/src/pages/')) return 'pages'
+          if (id.includes('/src/components/')) return 'components'
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000, // Optional: suppress warning if chunks are intentionally large
   },
 })
