@@ -99,11 +99,15 @@ const DashboardLayout = ({
                         onClick={() => setSidebarOpen(false)}
                     ></div>
 
-                    {/* Sidebar with slide animation */}
+                    {/* Sidebar with slide animation - Fixed height for mobile */}
                     <div
-                        className={`absolute left-0 top-0 w-64 h-full transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                        className={`absolute left-0 w-64 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                             }`}
-                        style={{ top: headerHeight }}
+                        style={{
+                            top: headerHeight,
+                            height: `calc(100vh - ${headerHeight})`,
+                            bottom: 0
+                        }}
                     >
                         <Sidebar onClose={() => setSidebarOpen(false)} />
                     </div>

@@ -146,63 +146,6 @@ const Sidebar = ({ onClose }) => {
                 }
             ]
         },
-        // {
-        //     icon: <FaBullhorn className="w-4 h-4 md:w-5 md:h-5" />,
-        //     label: 'Announcements',
-        //     path: '/announcements',
-        //     active: currentPath === '/announcements'
-        // },
-        // {
-        //     icon: <FaUsers className="w-4 h-4 md:w-5 md:h-5" />,
-        //     label: 'Officials',
-        //     path: '/officials',
-        //     active: currentPath === '/officials'
-        // },
-        // {
-        //     icon: <FaFileAlt className="w-4 h-4 md:w-5 md:h-5" />,
-        //     label: 'Issuance Details',
-        //     path: '/issuance-details',
-        //     active: currentPath === '/issuance-details'
-        // },
-        // {
-        //     icon: <FaDatabase className="w-4 h-4 md:w-5 md:h-5" />,
-        //     label: 'Content Management',
-        //     path: '/content-management',
-        //     active: currentPath === '/content-management'
-        // },
-        // {
-        //     icon: <FaClipboardList className="w-4 h-4 md:w-5 md:h-5" />,
-        //     label: 'Records',
-        //     key: 'records',
-        //     active: ['/records', '/record'].some(path => currentPath.startsWith(path)),
-        //     hasDropdown: true,
-        //     subItems: [
-        //         {
-        //             icon: <FiBook className="w-3 h-3 md:w-4 md:h-4" />,
-        //             label: 'Blotter Record',
-        //             path: '/records/blotter',
-        //             active: url === '/records/blotter'
-        //         },
-        //         {
-        //             icon: <FiUsers className="w-3 h-3 md:w-4 md:h-4" />,
-        //             label: 'Residents Management',
-        //             path: '/record/residents',
-        //             active: url === '/record/residents'
-        //         },
-        //         {
-        //             icon: <FiUserPlus className="w-3 h-3 md:w-4 md:h-4" />,
-        //             label: 'Pending Residents',
-        //             path: '/records/pending-residents',
-        //             active: url === '/records/pending-residents'
-        //         }
-        //     ]
-        // },
-        // {
-        //     icon: <FaClipboardCheck className="w-4 h-4 md:w-5 md:h-5" />,
-        //     label: 'Monitoring of Request',
-        //     path: '/request',
-        //     active: currentPath === '/request'
-        // },
     ];
 
     // Auto-open dropdowns and scroll to active item
@@ -259,7 +202,7 @@ const Sidebar = ({ onClose }) => {
     };
 
     return (
-        <div className="bg-white text-gray-700 w-64 shadow-lg flex flex-col h-full relative transform transition-all duration-300 ease-in-out">
+        <div className="bg-white text-gray-700 w-64 shadow-lg flex flex-col h-full relative transform transition-all duration-300 ease-in-out overflow-hidden">
             {/* Mobile close button with smooth animation */}
             {onClose && (
                 <button
@@ -270,6 +213,7 @@ const Sidebar = ({ onClose }) => {
                 </button>
             )}
 
+            {/* Profile Section - Fixed */}
             <div className="relative pt-5 pb-3 px-4 flex-shrink-0 transition-all duration-300 ease-in-out">
                 <ProfileBanner />
                 <div>
@@ -277,13 +221,23 @@ const Sidebar = ({ onClose }) => {
                 </div>
             </div>
 
+            {/* Navigation Header - Fixed */}
             <div className="bg-gray-200 py-2 px-4 flex-shrink-0 transition-colors duration-300 ease-in-out">
                 <p className="text-xs md:text-sm font-medium text-gray-700">Main Navigation</p>
             </div>
 
-            <nav ref={navRef} className="flex-1 overflow-y-auto overflow-x-hidden">
-                <div className="h-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                    <ul>
+            {/* Navigation Content - Scrollable */}
+            <div className="flex-1 min-h-0 relative">
+                <nav
+                    ref={navRef}
+                    className="h-full overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+                    style={{
+                        // Ensure proper scrolling on mobile
+                        WebkitOverflowScrolling: 'touch',
+                        scrollBehavior: 'smooth'
+                    }}
+                >
+                    <ul className="pb-4">
                         {navItems.map((item, index) => (
                             <li key={index} className="border-b border-gray-100 transition-all duration-200 ease-in-out hover:border-gray-200">
                                 {item.hasDropdown ? (
@@ -350,8 +304,8 @@ const Sidebar = ({ onClose }) => {
                             </li>
                         ))}
                     </ul>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
     );
 };
