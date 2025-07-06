@@ -380,7 +380,7 @@ const BreadCrumbPage = () => {
                     </div>
                 </Container>
 
-                {/* Usage Guidelines */}
+                {/* Usage Guideliness */}
                 <BreadcrumbGuidelines />
             </div>
         </DashboardLayout>
