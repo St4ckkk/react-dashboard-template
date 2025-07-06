@@ -19,6 +19,7 @@ import CardsPage from '@pages/components/cards/CardPage'
 import CarouselsPage from '@pages/components/carousels/CarouselPage'
 import ListGroupPage from '@pages/components/list-groups/ListGroupPage'
 import ModalPage from '@pages/components/modals/ModalPage'
+import TabPage from './pages/components/tabs/TabPage'
 
 // Import feature pages
 import ManageAnnouncements from '@pages/announcements/ManageAnnouncements'
@@ -50,7 +51,7 @@ function App() {
         <Route path="/components/modals" element={<ModalPage />} />
 
         {/* Placeholder routes for components not yet created */}
-        <Route path="/components/tabs" element={<ComingSoon />} />
+        <Route path="/components/tabs" element={<TabPage />} />
         <Route path="/components/pagination" element={<ComingSoon />} />
         <Route path="/components/progress" element={<ComingSoon />} />
         <Route path="/components/spinners" element={<ComingSoon />} />

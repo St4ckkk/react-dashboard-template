@@ -35,7 +35,7 @@ const Home = () => {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.3 }}
-                                    className="ml-3 text-xl font-bold text-deep-blue "
+                                    className="ml-3 text-xl font-bold text-deep-blue R"
                                 >
                                     St4ckkk
                                 </motion.span>
