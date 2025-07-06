@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
     FaHome, FaBullhorn, FaUsers, FaFileAlt, FaDatabase,
     FaClipboardList, FaClipboardCheck, FaChevronDown,
@@ -18,6 +18,8 @@ const Sidebar = ({ onClose }) => {
     const location = useLocation();
     const url = location.pathname;
     const currentPath = '/' + url.split('/').filter(Boolean)[0];
+    const navRef = useRef(null);
+    const activeItemRef = useRef(null);
 
     const [openDropdowns, setOpenDropdowns] = useState({
         records: false,
@@ -203,7 +205,9 @@ const Sidebar = ({ onClose }) => {
         // },
     ];
 
+    // Auto-open dropdowns and scroll to active item
     useEffect(() => {
+        // Auto-open dropdowns for active items
         navItems.forEach(item => {
             if (item.hasDropdown && item.active && !openDropdowns[item.key]) {
                 setOpenDropdowns(prev => ({
@@ -212,12 +216,46 @@ const Sidebar = ({ onClose }) => {
                 }));
             }
         });
+
+        // Scroll to active item after dropdowns are open
+        const scrollToActiveItem = () => {
+            if (navRef.current && activeItemRef.current) {
+                const navContainer = navRef.current;
+                const activeElement = activeItemRef.current;
+
+                const containerHeight = navContainer.clientHeight;
+                const elementTop = activeElement.offsetTop;
+                const elementHeight = activeElement.clientHeight;
+
+                // Calculate the ideal scroll position (center the active item)
+                const idealScrollTop = elementTop - (containerHeight / 2) + (elementHeight / 2);
+
+                // Smooth scroll to the active item
+                navContainer.scrollTo({
+                    top: Math.max(0, idealScrollTop),
+                    behavior: 'smooth'
+                });
+            }
+        };
+
+        // Delay scrolling to allow dropdown animations to complete
+        const timeoutId = setTimeout(scrollToActiveItem, 300);
+
+        return () => clearTimeout(timeoutId);
     }, [currentPath, url]);
 
     const handleLinkClick = () => {
         if (onClose) {
             onClose();
         }
+    };
+
+    // Function to check if an item should get the active ref
+    const shouldGetActiveRef = (item, isSubItem = false) => {
+        if (isSubItem) {
+            return item.active;
+        }
+        return item.active && (!item.hasDropdown || !item.subItems?.some(sub => sub.active));
     };
 
     return (
@@ -243,7 +281,7 @@ const Sidebar = ({ onClose }) => {
                 <p className="text-xs md:text-sm font-medium text-gray-700">Main Navigation</p>
             </div>
 
-            <nav className="flex-1 overflow-y-auto overflow-x-hidden">
+            <nav ref={navRef} className="flex-1 overflow-y-auto overflow-x-hidden">
                 <div className="h-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
                     <ul>
                         {navItems.map((item, index) => (
@@ -251,6 +289,7 @@ const Sidebar = ({ onClose }) => {
                                 {item.hasDropdown ? (
                                     <>
                                         <button
+                                            ref={shouldGetActiveRef(item) ? activeItemRef : null}
                                             onClick={() => toggleDropdown(item.key)}
                                             className={`w-full flex items-center justify-center px-3 md:px-4 py-2 md:py-3 text-sm md:text-base transition-all duration-300 ease-in-out transform hover:scale-[1.02] ${item.active || openDropdowns[item.key]
                                                 ? 'bg-deep-blue text-white shadow-md'
@@ -278,6 +317,7 @@ const Sidebar = ({ onClose }) => {
                                                         }}
                                                     >
                                                         <Link
+                                                            ref={shouldGetActiveRef(subItem, true) ? activeItemRef : null}
                                                             to={subItem.path}
                                                             onClick={handleLinkClick}
                                                             className={`flex items-center pl-10 md:pl-12 py-2 md:py-3 text-xs md:text-sm transition-all duration-200 ease-in-out ${subItem.active
@@ -295,6 +335,7 @@ const Sidebar = ({ onClose }) => {
                                     </>
                                 ) : (
                                     <Link
+                                        ref={shouldGetActiveRef(item) ? activeItemRef : null}
                                         to={item.path}
                                         onClick={handleLinkClick}
                                         className={`flex items-center px-3 md:px-4 py-2 md:py-3 text-sm md:text-base transition-all duration-300 ease-in-out transform hover:scale-[1.02] ${item.active

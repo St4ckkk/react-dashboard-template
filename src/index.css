@@ -313,35 +313,6 @@
     @apply inline-flex items-center gap-1.5  px-2 py-0.5  text-xs font-medium rounded-md;
   }
 
-  /* Status Badges */
-  @keyframes status-pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
-
-  .animate-pulse {
-    animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-bounce-subtle {
-    animation: bounce-subtle 1s ease-in-out infinite;
-  }
-
-  @keyframes bounce-subtle {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-3px);
-    }
-  }
-
   .list-group-flush {
     @apply border-0 rounded-none;
   }
@@ -359,6 +330,35 @@
   }
 }
 
+/* Status Badges */
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse {
+  animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 1s ease-in-out infinite;
+}
+
+@keyframes bounce-subtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 .counter-reset-list {
   counter-reset: section;
 }
@@ -373,4 +373,17 @@
 
 .counter-reset-list .list-group-item.active::before {
   color: white;
+}
+
+@keyframes striped {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1rem 0;
+  }
+}
+
+.animate-striped {
+  animation: striped 1s linear infinite;
 }

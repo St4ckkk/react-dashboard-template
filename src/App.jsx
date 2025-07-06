@@ -20,6 +20,7 @@ import CarouselsPage from '@pages/components/carousels/CarouselPage'
 import ListGroupPage from '@pages/components/list-groups/ListGroupPage'
 import ModalPage from '@pages/components/modals/ModalPage'
 import TabPage from './pages/components/tabs/TabPage'
+import PaginationPage from '@pages/components/paginations/PaginationPage'
 
 // Import feature pages
 import ManageAnnouncements from '@pages/announcements/ManageAnnouncements'
@@ -27,6 +28,7 @@ import MonitoringRequest from '@pages/monitoring/MonitoringRequest'
 import ManageOfficials from '@pages/officials/ManageOfficials'
 import ManageResidents from '@pages/residents/ManageResidents'
 import Profile from '@pages/settings/Profile'
+import ProgressPage from './pages/components/progress/ProgressPage'
 
 function App() {
   return (
@@ -52,8 +54,8 @@ function App() {
 
         {/* Placeholder routes for components not yet created */}
         <Route path="/components/tabs" element={<TabPage />} />
-        <Route path="/components/pagination" element={<ComingSoon />} />
-        <Route path="/components/progress" element={<ComingSoon />} />
+        <Route path="/components/pagination" element={<PaginationPage />} />
+        <Route path="/components/progress" element={<ProgressPage />} />
         <Route path="/components/spinners" element={<ComingSoon />} />
         <Route path="/components/tooltips" element={<ComingSoon />} />
         <Route path="/components/dropdowns" element={<ComingSoon />} />
