@@ -139,12 +139,6 @@ const Sidebar = ({ onClose }) => {
                     active: url === '/components/spinners'
                 },
                 {
-                    icon: <FiHelpCircle className="w-3 h-3 md:w-4 md:h-4" />,
-                    label: 'Tooltips',
-                    path: '/components/tooltips',
-                    active: url === '/components/tooltips'
-                },
-                {
                     icon: <FiBox className="w-3 h-3 md:w-4 md:h-4" />,
                     label: 'Toast',
                     path: '/components/toast',

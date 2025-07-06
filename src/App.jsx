@@ -30,6 +30,7 @@ import ManageResidents from '@pages/residents/ManageResidents'
 import Profile from '@pages/settings/Profile'
 import ProgressPage from '@pages/components/progress/ProgressPage'
 import SpinnerPage from '@pages/components/spinners/SpinnerPage'
+import ToastPage from '@pages/components/toast/ToastPage'
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
         <Route path="/components/carousels" element={<CarouselsPage />} />
         <Route path="/components/list-groups" element={<ListGroupPage />} />
         <Route path="/components/modals" element={<ModalPage />} />
+        <Route path="/components/toast" element={<ToastPage />} />
+
+
 
         {/* Placeholder routes for components not yet created */}
         <Route path="/components/tabs" element={<TabPage />} />
