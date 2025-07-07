@@ -406,9 +406,87 @@ const Home = () => {
                                     ))}
                                 </div>
                             </motion.div>
+
+
                         </div>
                     </div>
                 </div>
+                {/* Pricing Section */}
+                <section className="bg-[#f5faff] py-12 mt-16">
+                    <div className="max-w-5xl mx-auto px-4">
+                        <div className="text-center mb-8">
+                            <div className="border border-blue-200 rounded-lg py-2 px-4 inline-block mb-4 bg-white text-blue-700 font-semibold text-sm">
+                                Exclusive Deal: <span className="font-bold">Save 30%</span> on Lifetime Access!
+                            </div>
+                            <h2 className="text-2xl font-bold text-deep-blue mb-2">Choose Your Plan</h2>
+                            <p className="text-light-blue">Get access to all React & Laravel dashboard templates. Pay securely with GCash.</p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {/* Pro Plan */}
+                            <div className="bg-white rounded-xl shadow p-6 flex flex-col">
+                                <h3 className="text-lg font-semibold text-deep-blue mb-2">Starter Plan</h3>
+                                <div className="text-3xl font-bold text-blue-600 mb-2">₱999</div>
+                                <div className="text-sm text-gray-500 mb-4">One website / One-time payment</div>
+                                <ul className="mb-6 space-y-2 text-sm">
+                                    <li className="text-green-600">✔ Use in personal projects</li>
+                                    <li className="text-green-600">✔ Create websites for clients</li>
+                                    <li className="text-green-600">✔ Remove footer credit link</li>
+                                    <li className="text-green-600">✔ Fully working <span className="font-semibold">Laravel API</span> backend</li>
+                                    <li className="text-green-600">✔ Premium support via Email</li>
+                                    <li className="text-green-600">✔ Source code access</li>
+                                    <li className="text-red-500 line-through">✘ Access to all templates</li>
+                                </ul>
+                                <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2 font-semibold transition mb-2">
+                                    Pay with GCash
+                                </button>
+                            </div>
+                            {/* Premium Plan */}
+                            <div className="bg-white rounded-xl shadow-lg border-2 border-blue-600 p-6 flex flex-col scale-105">
+                                <div className="mb-2">
+                                    <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded font-bold">Recommended</span>
+                                </div>
+                                <h3 className="text-lg font-semibold text-deep-blue mb-2">Premium Plan</h3>
+                                <div className="text-3xl font-bold text-blue-600 mb-2">₱2,499</div>
+                                <div className="text-sm text-gray-500 mb-4">Unlimited websites / One-time payment</div>
+                                <ul className="mb-6 space-y-2 text-sm">
+                                    <li className="text-green-600">✔ Use in personal & client projects</li>
+                                    <li className="text-green-600">✔ Remove footer credit link</li>
+                                    <li className="text-green-600">✔ All React & Laravel dashboard templates</li>
+                                    <li className="text-green-600">✔ Fully working <span className="font-semibold">Laravel API</span> backend</li>
+                                    <li className="text-green-600">✔ Premium support via Email</li>
+                                    <li className="text-green-600">✔ Source code access</li>
+                                    <li className="text-green-600">✔ Lifetime updates</li>
+                                </ul>
+                                <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2 font-semibold transition mb-2">
+                                    Pay with GCash
+                                </button>
+                            </div>
+                            {/* Free Plan */}
+                            <div className="bg-white rounded-xl shadow p-6 flex flex-col opacity-60">
+                                <h3 className="text-lg font-semibold text-deep-blue mb-2">Free Plan</h3>
+                                <div className="text-3xl font-bold text-gray-400 mb-2">₱0</div>
+                                <div className="text-sm text-gray-500 mb-4">Limited features</div>
+                                <ul className="mb-6 space-y-2 text-sm">
+                                    <li className="text-green-600">✔ Use in personal projects</li>
+                                    <li className="text-red-500 line-through">✘ Create websites for clients</li>
+                                    <li className="text-red-500 line-through">✘ Remove footer credit link</li>
+                                    <li className="text-red-500 line-through">✘ Laravel API backend</li>
+                                    <li className="text-red-500 line-through">✘ Premium support</li>
+                                    <li className="text-red-500 line-through">✘ Source code access</li>
+                                    <li className="text-red-500 line-through">✘ Lifetime updates</li>
+                                </ul>
+                                <button className="bg-gray-300 text-gray-500 rounded-lg py-2 font-semibold cursor-not-allowed" disabled>
+                                    Not Available
+                                </button>
+                            </div>
+                        </div>
+                        <div className="text-center mt-8 text-xs text-gray-500">
+                            All payments are processed via <span className="font-semibold text-blue-600">GCash</span>. After payment, you will receive access instructions by email.<br />
+                            For custom plans or questions, <a href="mailto:support@example.com" className="text-blue-600 underline">contact support</a>.
+                        </div>
+                    </div>
+                </section>
+
             </div>
 
             {/* Footer */}
