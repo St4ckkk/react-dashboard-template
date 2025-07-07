@@ -1,12 +1,89 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaGithub, FaReact, FaBolt, FaHeart, FaBell } from 'react-icons/fa'
-import { SiTailwindcss } from 'react-icons/si'
-import { MdDashboard } from 'react-icons/md'
+import { FaGithub, FaReact, FaBolt, FaHeart, FaBell, FaDownload, FaExternalLinkAlt, FaCalendarAlt, FaCode, FaStar } from 'react-icons/fa'
+import { SiTailwindcss, SiVite, SiJavascript } from 'react-icons/si'
+import { MdDashboard, MdUpdate, MdBuild } from 'react-icons/md'
 import { HiSparkles } from 'react-icons/hi'
 
 const Home = () => {
+    const [repoData, setRepoData] = useState({
+        lastUpdated: 'Dec 15, 2024',
+        reactVersion: 'React v18.3.1',
+        tailwindVersion: 'Tailwind CSS v3.4.0',
+        stars: 0,
+        forks: 0,
+        loading: true
+    })
+
+    // GitHub repository details
+    const GITHUB_REPO = 'St4ckkk/react-dashboard-template'
+
+
+
+    const downloadRepository = async () => {
+        try {
+            const downloadUrl = `https://github.com/${GITHUB_REPO}/archive/refs/heads/main.zip`
+
+
+            const link = document.createElement('a')
+            link.href = downloadUrl
+            link.download = `${GITHUB_REPO.split('/')[1]}-main.zip`
+
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+
+
+            console.log('Download started!')
+        } catch (error) {
+            console.error('Download failed:', error)
+
+            window.open(`https://github.com/${GITHUB_REPO}`, '_blank')
+        }
+    }
+
+    useEffect(() => {
+        const fetchGitHubData = async () => {
+            try {
+                // Fetch repository data
+                const repoResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`)
+                const repoInfo = await repoResponse.json()
+
+                // Fetch package.json to get dependency versions
+                const packageResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/package.json`)
+                const packageData = await packageResponse.json()
+                const packageContent = JSON.parse(atob(packageData.content))
+
+                // Extract React and Tailwind versions
+                const reactVersion = packageContent.dependencies?.react || packageContent.devDependencies?.react
+                const tailwindVersion = packageContent.dependencies?.tailwindcss || packageContent.devDependencies?.tailwindcss
+
+                // Format last updated date
+                const lastUpdated = new Date(repoInfo.updated_at).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                })
+
+                setRepoData({
+                    lastUpdated,
+                    reactVersion: `React ${reactVersion?.replace('^', 'v') || 'v18.3.1'}`,
+                    tailwindVersion: `Tailwind CSS ${tailwindVersion?.replace('^', 'v') || 'v3.4.0'}`,
+                    stars: repoInfo.stargazers_count || 0,
+                    forks: repoInfo.forks_count || 0,
+                    loading: false
+                })
+            } catch (error) {
+                console.error('Error fetching GitHub data:', error)
+
+                setRepoData(prev => ({ ...prev, loading: false }))
+            }
+        }
+
+        fetchGitHubData()
+    }, [])
+
     return (
         <div className="min-h-screen bg-layout">
             {/* Navigation */}
@@ -14,7 +91,7 @@ const Home = () => {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className="bg-white shadow-lg backdrop-blur-sm sticky top-0 z-50"
+                className="bg-white shadow-sm backdrop-blur-sm sticky top-0 z-50 border-b border-gray-100"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
@@ -35,9 +112,9 @@ const Home = () => {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.3 }}
-                                    className="ml-3 text-xl font-bold text-deep-blue R"
+                                    className="ml-3 text-xl font-bold text-deep-blue"
                                 >
-                                    St4ckkk
+                                    St4ckkk Template
                                 </motion.span>
                             </div>
                         </div>
@@ -49,146 +126,284 @@ const Home = () => {
                         >
                             <Link
                                 to="/login"
-                                className="text-gray-600 hover:text-blue-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-100"
+                                className="text-light-blue hover:text-deep-blue px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-100"
                             >
                                 Login
                             </Link>
                             <Link
                                 to="/dashboard"
-                                className="bg-brand-gradient text-white px-6 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                                className="bg-deep-blue text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-light-blue transition-all duration-200 transform hover:scale-105 shadow-sm"
                             >
-                                Dashboard
+                                Live Demo
                             </Link>
                         </motion.div>
                     </div>
                 </div>
             </motion.nav>
 
-            {/* Hero Section */}
-            <div className="relative overflow-hidden bg-layout">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="relative z-10 py-16 lg:py-24">
-                        <div className="grid lg:grid-cols-2 gap-12 items-center">
-                            {/* Left Content */}
-                            <div className="text-center lg:text-left">
-                                <motion.h1
-                                    initial={{ opacity: 0, y: 50 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.6, duration: 0.8 }}
-                                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
-                                >
-                                    <span className="block">Modern React Dashboard</span>
+            {/* Main Content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="grid lg:grid-cols-3 gap-8">
+                    {/* Left Content - 2/3 width */}
+                    <div className="lg:col-span-2">
+                        {/* Hero Section */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2, duration: 0.8 }}
+                            className="mb-8"
+                        >
+                            <h1 className="text-4xl lg:text-5xl font-bold text-deep-blue mb-4">
+                                React Dashboard Template
+                                <span className="block text-deep-blue text-2xl lg:text-3xl font-medium mt-2">
+                                    Free React Admin Template
+                                </span>
+                            </h1>
+                        </motion.div>
 
-                                </motion.h1>
-                                <motion.p
-                                    initial={{ opacity: 0, y: 30 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.8, duration: 0.8 }}
-                                    className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
-                                >
-                                    Professional dashboard templates and UI components built with modern React and Tailwind CSS.
-                                    Clean, responsive, and production-ready solutions for your next project.
-                                </motion.p>
-                                <motion.div
-                                    initial={{ opacity: 0, y: 30 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 1, duration: 0.8 }}
-                                    className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-                                >
-                                    <motion.div
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <Link
-                                            to="/dashboard"
-                                            className="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-xl text-white bg-brand-gradient hover:shadow-lg transition-all duration-200 transform hover:scale-105"
-                                        >
-                                            <MdDashboard className="mr-2" />
-                                            Explore Dashboard
-                                        </Link>
-                                    </motion.div>
-                                    <motion.div
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <Link
-                                            to="/login"
-                                            className="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-xl text-gray-700 bg-white border-2 border-gray-300 hover:border-gray-400 hover:shadow-md transition-all duration-200"
-                                        >
-                                            Get Started
-                                        </Link>
-                                    </motion.div>
-                                </motion.div>
+                        {/* Dashboard Preview */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.8 }}
+                            className="relative mb-8"
+                        >
+                            <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                                <img
+                                    src="/static/img/cover.png"
+                                    alt="React Dashboard Preview"
+                                    className="w-full h-auto"
+                                />
                             </div>
 
-                            {/* Right Image */}
+                            {/* Floating Tech Icons */}
                             <motion.div
-                                initial={{ opacity: 0, x: 100, scale: 0.8 }}
-                                animate={{ opacity: 1, x: 0, scale: 1 }}
-                                transition={{ delay: 0.4, duration: 1.2, type: "spring", stiffness: 100 }}
-                                className="relative"
+                                animate={{
+                                    y: [0, -10, 0],
+                                    rotate: [0, 5, -5, 0]
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    repeatType: "reverse"
+                                }}
+                                className="absolute -top-4 -right-4 bg-deep-blue text-white p-3 rounded-full shadow-lg z-10"
                             >
-                                <div className="relative">
-                                    {/* Background decorations */}
-                                    <div className="absolute -inset-4 bg-gradient-to-br from-gray-400 to-gray-600 rounded-3xl opacity-20 transform rotate-3"></div>
-                                    <div className="absolute -inset-2 bg-gradient-to-tr from-gray-500 to-gray-700 rounded-3xl opacity-30 transform -rotate-2"></div>
+                                <FaReact className="h-6 w-6" />
+                            </motion.div>
 
-                                    {/* Main image */}
-                                    <motion.img
-                                        whileHover={{ scale: 1.02 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="relative z-10 w-full h-auto rounded-2xl shadow-2xl border-4 border-white"
-                                        src="/static/img/cover.png"
-                                        alt="St4ckkk Dashboard Preview"
-                                    />
+                            <motion.div
+                                animate={{
+                                    y: [0, 10, 0],
+                                    x: [0, 5, 0]
+                                }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    repeatType: "reverse",
+                                    delay: 1
+                                }}
+                                className="absolute -bottom-4 -left-4 bg-light-blue text-white p-3 rounded-full shadow-lg z-10"
+                            >
+                                <SiTailwindcss className="h-6 w-6" />
+                            </motion.div>
+                        </motion.div>
 
-                                    {/* Floating elements */}
-                                    <motion.div
-                                        animate={{
-                                            y: [0, -10, 0],
-                                            rotate: [0, 5, -5, 0]
-                                        }}
-                                        transition={{
-                                            duration: 4,
-                                            repeat: Infinity,
-                                            repeatType: "reverse"
-                                        }}
-                                        className="absolute -top-4 -right-4 bg-gray-700 text-white p-3 rounded-full shadow-lg z-20"
+                        {/* Description */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6, duration: 0.8 }}
+                            className="prose prose-lg max-w-none text-gray-600 mb-8"
+                        >
+                            <p className="text-lg leading-relaxed mb-4">
+                                <strong className="text-deep-blue">St4ckkk Template</strong> is a powerful admin and dashboard template based on the latest version of React framework.
+                                It provides a clean and intuitive design that is focused on user experience. The custom components included
+                                have been carefully customized to fit with the overall look of the theme, working seamlessly across browsers, tablets and phones.
+                            </p>
+                            <p className="text-lg leading-relaxed mb-4">
+                                St4ckkk Template comes with lots of reusable and beautiful UI elements and components like tables, charts, forms,
+                                modals, notifications and many more. It will just fit to any app and project you're building.
+                            </p>
+                            <p className="text-lg leading-relaxed">
+                                St4ckkk Template has a fully responsive layout. It displays perfectly on all the modern displays and resolutions
+                                from laptops to smartphones, including Retina screens and mobile devices.
+                            </p>
+                        </motion.div>
+
+                        {/* Action Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.8, duration: 0.8 }}
+                            className="flex flex-col sm:flex-row gap-4"
+                        >
+                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                <Link
+                                    to="/dashboard"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-lg text-white bg-deep-blue hover:bg-light-blue transition-all duration-200 shadow-sm"
+                                >
+                                    <FaExternalLinkAlt className="mr-2 h-4 w-4" />
+                                    Live Demo
+                                </Link>
+                            </motion.div>
+                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                <button
+                                    onClick={downloadRepository}
+                                    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-lg text-white bg-light-blue hover:bg-deep-blue transition-all duration-200 shadow-sm"
+                                >
+                                    <FaDownload className="mr-2 h-4 w-4" />
+                                    Download
+                                </button>
+                            </motion.div>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Sidebar - 1/3 width */}
+                    <div className="lg:col-span-1">
+                        <div className="space-y-6">
+                            {/* Template Info Card - Now Dynamic */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.3, duration: 0.8 }}
+                                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+                            >
+                                <div className="flex items-center gap-2 mb-4">
+                                    <h3 className="text-lg font-semibold text-deep-blue">
+                                        Free React admin template
+                                    </h3>
+                                    {!repoData.loading && (
+                                        <div className="flex items-center gap-1 text-yellow-500">
+                                            <FaStar className="h-3 w-3" />
+                                            <span className="text-xs font-medium">{repoData.stars}</span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                                        <span className="text-sm font-medium text-light-blue flex items-center gap-2">
+                                            <FaCalendarAlt className="h-3 w-3" />
+                                            Last Updated:
+                                        </span>
+                                        <span className="text-sm text-deep-blue">
+                                            {repoData.loading ? (
+                                                <div className="h-4 w-20 bg-gray-200 rounded animate-pulse"></div>
+                                            ) : (
+                                                repoData.lastUpdated
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                                        <span className="text-sm font-medium text-light-blue flex items-center gap-2">
+                                            <FaReact className="h-3 w-3 text-blue-500" />
+                                            Built with:
+                                        </span>
+                                        <span className="text-sm text-deep-blue">
+                                            {repoData.loading ? (
+                                                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                                            ) : (
+                                                repoData.reactVersion
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                                        <span className="text-sm font-medium text-light-blue flex items-center gap-2">
+                                            <SiTailwindcss className="h-3 w-3 text-cyan-500" />
+                                            Framework:
+                                        </span>
+                                        <span className="text-sm text-deep-blue">
+                                            {repoData.loading ? (
+                                                <div className="h-4 w-28 bg-gray-200 rounded animate-pulse"></div>
+                                            ) : (
+                                                repoData.tailwindVersion
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between items-center py-2">
+                                        <span className="text-sm font-medium text-light-blue flex items-center gap-2">
+                                            <FaCode className="h-3 w-3" />
+                                            GitHub Stars:
+                                        </span>
+                                        <span className="text-sm text-deep-blue">
+                                            {repoData.loading ? (
+                                                <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+                                            ) : (
+                                                `${repoData.stars} stars`
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-6 space-y-3">
+                                    <Link
+                                        to="/dashboard"
+                                        className="w-full inline-flex items-center justify-center px-4 py-3 text-sm font-medium rounded-lg text-white bg-deep-blue hover:bg-light-blue transition-all duration-200"
                                     >
-                                        <FaReact className="h-6 w-6" />
-                                    </motion.div>
-
-                                    <motion.div
-                                        animate={{
-                                            y: [0, 10, 0],
-                                            x: [0, 5, 0]
-                                        }}
-                                        transition={{
-                                            duration: 3,
-                                            repeat: Infinity,
-                                            repeatType: "reverse",
-                                            delay: 1
-                                        }}
-                                        className="absolute -bottom-4 -left-4 bg-gray-600 text-white p-3 rounded-full shadow-lg z-20"
+                                        Live Demo
+                                    </Link>
+                                    <a
+                                        href={`https://github.com/${GITHUB_REPO}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full inline-flex items-center justify-center px-4 py-3 text-sm font-medium rounded-lg text-white bg-light-blue hover:bg-deep-blue transition-all duration-200"
                                     >
-                                        <SiTailwindcss className="h-6 w-6" />
-                                    </motion.div>
+                                        <FaGithub className="mr-2 h-4 w-4" />
+                                        View on GitHub
+                                    </a>
+                                </div>
+                            </motion.div>
 
-                                    <motion.div
-                                        animate={{
-                                            scale: [1, 1.1, 1],
-                                            rotate: [0, 180, 360]
-                                        }}
-                                        transition={{
-                                            duration: 6,
-                                            repeat: Infinity,
-                                            repeatType: "reverse",
-                                            delay: 2
-                                        }}
-                                        className="absolute top-1/2 -left-6 bg-yellow-500 text-white p-2 rounded-full shadow-lg z-20"
-                                    >
-                                        <HiSparkles className="h-4 w-4" />
-                                    </motion.div>
+                            {/* Features Card */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5, duration: 0.8 }}
+                                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+                            >
+                                <h3 className="text-lg font-semibold text-deep-blue mb-4">Key Features</h3>
+                                <div className="space-y-3">
+                                    {[
+                                        { icon: <FaReact className="h-4 w-4 text-blue-500" />, text: "Modern React 18" },
+                                        { icon: <SiTailwindcss className="h-4 w-4 text-cyan-500" />, text: "Tailwind CSS" },
+                                        { icon: <SiVite className="h-4 w-4 text-purple-500" />, text: "Vite Build Tool" },
+                                        { icon: <MdDashboard className="h-4 w-4 text-green-500" />, text: "Responsive Design" },
+                                        { icon: <FaBell className="h-4 w-4 text-red-500" />, text: "Rich Components" },
+                                        { icon: <HiSparkles className="h-4 w-4 text-yellow-500" />, text: "Modern UI/UX" }
+                                    ].map((feature, index) => (
+                                        <div key={index} className="flex items-center gap-3">
+                                            {feature.icon}
+                                            <span className="text-sm text-light-blue">{feature.text}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* Tech Stack Card */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.7, duration: 0.8 }}
+                                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+                            >
+                                <h3 className="text-lg font-semibold text-deep-blue mb-4">Technology Stack</h3>
+                                <div className="grid grid-cols-2 gap-4">
+                                    {[
+                                        { icon: <FaReact className="h-8 w-8 text-blue-500" />, name: "React" },
+                                        { icon: <SiTailwindcss className="h-8 w-8 text-cyan-500" />, name: "Tailwind" },
+                                        { icon: <SiVite className="h-8 w-8 text-purple-500" />, name: "Vite" },
+                                        { icon: <SiJavascript className="h-8 w-8 text-yellow-500" />, name: "JavaScript" }
+                                    ].map((tech, index) => (
+                                        <motion.div
+                                            key={index}
+                                            whileHover={{ scale: 1.05 }}
+                                            className="flex flex-col items-center p-3 border border-gray-100 rounded-lg hover:shadow-sm hover:border-deep-blue transition-all duration-200"
+                                        >
+                                            {tech.icon}
+                                            <span className="text-xs font-medium text-light-blue mt-2">{tech.name}</span>
+                                        </motion.div>
+                                    ))}
                                 </div>
                             </motion.div>
                         </div>
@@ -196,129 +411,45 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Features Section */}
-            <motion.div
+            {/* Footer */}
+            <motion.footer
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="py-20 bg-white"
+                className="bg-white border-t border-gray-200 mt-16"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-16"
-                    >
-                        <h2 className="text-base text-gray-600 font-semibold tracking-wide uppercase mb-2">What We Offer</h2>
-                        <p className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                            Professional Dashboard Solutions
-                        </p>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Everything you need to build modern, responsive dashboards with ease and efficiency.
-                        </p>
-                    </motion.div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {[
-                            {
-                                icon: <FaBell className="h-6 w-6" />,
-                                title: "Interactive Components",
-                                description: "Rich UI components including notifications, modals, and interactive elements for engaging user experiences.",
-                                color: "from-red-500 to-pink-500"
-                            },
-                            {
-                                icon: <HiSparkles className="h-6 w-6" />,
-                                title: "Modern Design System",
-                                description: "Consistent design language with beautiful styling and professional layouts that adapt to any brand.",
-                                color: "from-yellow-500 to-orange-500"
-                            },
-                            {
-                                icon: <SiTailwindcss className="h-6 w-6" />,
-                                title: "Responsive Framework",
-                                description: "Built with Tailwind CSS for rapid development and perfect responsiveness across all devices.",
-                                color: "from-cyan-500 to-blue-500"
-                            },
-                            {
-                                icon: <FaReact className="h-6 w-6" />,
-                                title: "React Architecture",
-                                description: "Modern React patterns with hooks, functional components, and optimized performance for scalable applications.",
-                                color: "from-blue-500 to-purple-500"
-                            }
-                        ].map((feature, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1, duration: 0.8 }}
-                                viewport={{ once: true }}
-                                whileHover={{ y: -5 }}
-                                className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="flex flex-col md:flex-row justify-between items-center">
+                        <div className="flex items-center mb-4 md:mb-0">
+                            <img
+                                src="/static/img/template-logo2.png"
+                                alt="St4ckkk Logo"
+                                className="h-6 w-6 object-contain mr-2"
+                            />
+                            <span className="text-sm text-light-blue">
+                                © 2024 St4ckkk Template. Built with <FaHeart className="inline h-3 w-3 text-red-500 mx-1" /> using React.
+                            </span>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <a
+                                href={`https://github.com/${GITHUB_REPO}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-light-blue hover:text-deep-blue transition-colors duration-200"
                             >
-                                <motion.div
-                                    whileHover={{ scale: 1.1, rotate: 5 }}
-                                    className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gray-700 text-white mb-4"
-                                >
-                                    {feature.icon}
-                                </motion.div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    {feature.description}
-                                </p>
-                            </motion.div>
-                        ))}
+                                <FaGithub className="h-5 w-5" />
+                            </a>
+                            <Link
+                                to="/dashboard"
+                                className="text-sm text-deep-blue hover:text-light-blue font-medium transition-colors duration-200"
+                            >
+                                View Dashboard
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </motion.div>
-
-            {/* CTA Section */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="bg-brand-gradient"
-            >
-                <div className="max-w-4xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="text-3xl sm:text-4xl font-bold text-white mb-4"
-                    >
-                        <span className="block">Ready to Get Started?</span>
-                        <span className="block">Explore Our Dashboard!</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto"
-                    >
-                        Experience our professional dashboard solutions and see how they can transform your next project.
-                    </motion.p>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.8 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <Link
-                            to="/dashboard"
-                            className="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 transition-all duration-200 transform hover:scale-105 shadow-lg"
-                        >
-                            <span className="mr-2">View Dashboard</span>
-                            <MdDashboard className="h-5 w-5" />
-                        </Link>
-                    </motion.div>
-                </div>
-            </motion.div>
+            </motion.footer>
         </div>
     )
 }
